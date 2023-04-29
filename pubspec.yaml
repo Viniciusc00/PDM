@@ -39,6 +39,6 @@ flutter:
     - lib/assets/images/
 
   fonts:
-    - family: Billabong
+    - family: PermanentMarker
       fonts:
-       - asset: lib\assets\fonts\Billabong.ttf
+       - asset: lib\assets\fonts\PermanentMarker-Regular.ttf

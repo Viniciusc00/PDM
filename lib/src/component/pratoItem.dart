@@ -34,7 +34,7 @@ Widget pratosItem(Pratos comida) {
               ],
             ),
           ),
-          trailing: Image.network(comida.imagem),
+          leading: Image.network(comida.imagem),
           contentPadding: EdgeInsets.all(15),
         ),
         Divider(),
