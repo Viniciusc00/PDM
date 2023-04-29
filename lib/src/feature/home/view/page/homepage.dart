@@ -44,6 +44,7 @@ class _HomePageState extends State<HomePage> {
           BottomNavigationBarItem(
               icon: Icon(Icons.account_circle_outlined), label: 'Account'),
         ],
+        selectedItemColor: Colors.red,
       ),
     );
   }

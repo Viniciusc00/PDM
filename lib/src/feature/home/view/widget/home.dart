@@ -12,7 +12,7 @@ class UserHome extends StatelessWidget {
   PreferredSizeWidget _minhaBarra(String texto) {
     return AppBar(
       title: Text(texto, style: const TextStyle(color: Colors.white, fontFamily: 'PermanentMarker', fontSize: 37)),
-      backgroundColor: Color.fromARGB(255, 255, 0, 0),
+      backgroundColor: Colors.red,
       elevation: 0,
     );
   }
