@@ -1,8 +1,10 @@
+import 'package:appComida/src/feature/home/view/widget/search.dart';
 import 'package:flutter/material.dart';
 
 import '../widget/account.dart';
 import '../widget/home.dart';
 import '../widget/cart.dart';
+import '../widget/search.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -40,9 +42,7 @@ class _HomePageState extends State<HomePage> {
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(icon: Icon(Icons.shopping_cart), label: 'Carrinho'),
-        
-          BottomNavigationBarItem(
-              icon: Icon(Icons.account_circle_outlined), label: 'Account'),
+          BottomNavigationBarItem(icon: Icon(Icons.account_circle_outlined), label: 'Account'),
         ],
         selectedItemColor: Colors.red,
       ),

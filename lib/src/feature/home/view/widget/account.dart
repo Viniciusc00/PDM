@@ -6,7 +6,7 @@ class UserAccount extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: Center(child: Text('Conta', style: TextStyle(fontSize: 48))),
+      body: Center(child: Text('Account', style: TextStyle(fontSize: 48))),
     );
   }
 }
