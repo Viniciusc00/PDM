@@ -11,7 +11,7 @@ class UserHome extends StatelessWidget {
 
   PreferredSizeWidget _minhaBarra(String texto) {
     return AppBar(
-      title: Text(texto, style: const TextStyle(color: Colors.white, fontFamily: 'PermanentMarker', fontSize: 30)),
+      title: Text(texto, style: const TextStyle(color: Colors.white, fontFamily: 'PermanentMarker', fontSize: 37)),
       backgroundColor: Color.fromARGB(255, 255, 0, 0),
       elevation: 0,
     );
@@ -20,7 +20,7 @@ class UserHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _minhaBarra("App de Comidas"),
+      appBar: _minhaBarra("Laricão"),
        body: SingleChildScrollView(
               child: Column(
                 children: [

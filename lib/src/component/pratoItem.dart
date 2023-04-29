@@ -14,7 +14,7 @@ Widget pratosItem(Pratos comida) {
     return Column(
       children: [
         ListTile(
-          title: Text(comida.nome),
+          title: Text(comida.nome, style: TextStyle(fontWeight: FontWeight.bold)),
           subtitle: Padding(
             padding: EdgeInsets.only(top: 12.0),
             child: Column(
@@ -28,7 +28,7 @@ Widget pratosItem(Pratos comida) {
                   padding: EdgeInsets.only(top: 24),
                   child: Text(
                     comida.preco,
-                    style: TextStyle(fontSize: 15, color: Colors.black),
+                    style: TextStyle(fontSize: 15, color: Colors.black, fontWeight: FontWeight.bold),
                   ),
                 ),
               ],
