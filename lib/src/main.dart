@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:appComida/src/app_module.dart';
-import 'package:appComida/src/feature/onboarding/view/page/onboarding_page.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
 import 'app_widget.dart';
 

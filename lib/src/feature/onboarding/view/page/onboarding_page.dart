@@ -6,7 +6,7 @@ import 'package:appComida/src/feature/onboarding/view/page/size_configs.dart';
 import 'package:appComida/src/main.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:appComida/src/feature/login/view/page/login.dart';
+
 
 import '../widget/button_to_home.dart';
 import '../widget/navegation_button.dart';

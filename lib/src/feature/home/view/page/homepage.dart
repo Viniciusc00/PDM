@@ -1,10 +1,9 @@
-import 'package:appComida/src/feature/home/view/widget/search.dart';
 import 'package:flutter/material.dart';
 
 import '../widget/account.dart';
 import '../widget/home.dart';
 import '../widget/cart.dart';
-import '../widget/search.dart';
+
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

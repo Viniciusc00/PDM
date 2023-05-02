@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:appComida/src/component/minha_app_bar.dart';
 import 'package:appComida/assets/repository/pratos_repository.dart';
 import 'package:appComida/src/component/pratoItem.dart';
-import '../widget/search.dart';
+
 
 class UserHome extends StatelessWidget {
   UserHome({super.key});
