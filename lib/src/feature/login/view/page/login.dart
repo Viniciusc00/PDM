@@ -1,11 +1,11 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:appComida/src/feature/login/view/widget/button_signup.dart';
-import 'package:appComida/src/feature/login/view/widget/button_recovery_password.dart';
 import 'package:appComida/src/feature/home/view/page/homepage.dart';
 import 'package:http/http.dart' as http;
 import 'package:appComida/src/feature/login/config_url.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:appComida/src/feature/login/view/page/cadastro.dart';
+import 'package:appComida/src/feature/login/view/page/reset_password.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -187,6 +187,54 @@ class _LoginPageState extends State<LoginPage> {
           ],
         ),
       ),
+    );
+  }
+}
+
+class button_signup extends StatelessWidget {
+  const button_signup({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+      child: Text(
+        "Cadastre-se",
+        textAlign: TextAlign.center,
+      ),
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => SignupPage(),
+          ),
+        );
+      },
+    );
+  }
+}
+
+class button_recovery_password extends StatelessWidget {
+  const button_recovery_password({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+      child: Text(
+        "Recuperar Senha",
+        textAlign: TextAlign.right,
+      ),
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ResetPasswordPage(),
+          ),
+        );
+      },
     );
   }
 }

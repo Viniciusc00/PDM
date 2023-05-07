@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:appComida/src/feature/login/view/page/login.dart';
 import 'package:flutter/material.dart';
-import 'package:appComida/src/feature/login/view/widget/button_signup_leave.dart';
 import 'package:http/http.dart' as http;
 import 'package:appComida/src/feature/login/config_url.dart';
 
@@ -214,6 +213,23 @@ class _SignupPageState extends State<SignupPage> {
           ],
         ),
       ),
+    );
+  }
+}
+
+class button_signup_leave extends StatelessWidget {
+  const button_signup_leave({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+      child: Text(
+        "Cancelar",
+        textAlign: TextAlign.center,
+      ),
+      onPressed: () => Navigator.pop(context, false),
     );
   }
 }
