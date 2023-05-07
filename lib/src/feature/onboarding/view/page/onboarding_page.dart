@@ -132,7 +132,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                         onPressed: () {
                           Navigator.push(context,
                           MaterialPageRoute(builder: (context) =>
-                          HomePage()));
+                          LoginPage()));
                         },
                       ),
                       Row(
