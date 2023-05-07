@@ -1,12 +1,39 @@
 import 'package:flutter/material.dart';
-import 'package:appComida/assets/repository/pratos_repository.dart';
 import 'package:appComida/src/component/pratoItem.dart';
+import 'package:appComida/assets/models/pratos.dart';
+import 'package:http/http.dart' as http;
+import 'package:appComida/src/feature/login/config_url.dart';
+import 'dart:convert';
 
+class UserHome extends StatefulWidget {
+  const UserHome({super.key});
 
-class UserHome extends StatelessWidget {
-  UserHome({super.key});
+  @override
+  State<UserHome> createState() => _UserHomeState();
+}
 
-  final pratos = PratosRepository.prato;
+class _UserHomeState extends State<UserHome> {
+  List<Pratos> pratosList = [];
+
+  Future<List<Pratos>> getPratos() async {
+    final response = await http.get(Uri.parse(listar_pratos));
+    var data = jsonDecode(response.body);
+    print(data);
+    if (response.statusCode == 200) {
+      for (Map i in data) {
+        Pratos prato = Pratos(
+            nome: i['nome'],
+            descricao: i['descricao'],
+            preco: i['preco'],
+            imagem: i['imagem']);
+        pratosList.add(prato);
+        print(prato);
+      }
+      return pratosList;
+    } else {
+      return pratosList;
+    }
+  }
 
   PreferredSizeWidget _minhaBarra(String texto) {
     return AppBar(
@@ -32,7 +59,7 @@ class UserHome extends StatelessWidget {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              gerarListaComidas(pratos),
+              gerarListaComidas(pratosList),
             ],
           ),
         ));
