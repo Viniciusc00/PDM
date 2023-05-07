@@ -1,6 +1,54 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:appComida/src/feature/login/config_url.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:convert';
+import 'package:appComida/src/feature/login/view/page/login.dart';
 
-class ResetPasswordPage extends StatelessWidget {
+class ResetPasswordPage extends StatefulWidget {
+  const ResetPasswordPage({super.key});
+
+  @override
+  State<ResetPasswordPage> createState() => _ResetPasswordPageState();
+}
+
+class _ResetPasswordPageState extends State<ResetPasswordPage> {
+
+  TextEditingController emailController = TextEditingController();
+  
+  bool _isNotValidate = false;
+
+  late SharedPreferences prefs;
+
+  void recoverPassword() async {
+    if (emailController.text.isNotEmpty) {
+      var regBody = {
+        "email": emailController.text,
+      };
+
+      var response = await http.post(Uri.parse(recoverpassword),
+          headers: {"Content-Type": "application/json"},
+          body: json.encode(regBody),
+          
+          );
+
+      var jsonResponse = jsonDecode(response.body);
+      
+
+      if(jsonResponse['status'])
+      {
+        Navigator.push(context,MaterialPageRoute(builder: (context)=>LoginPage()));
+      }else{
+        print("Algo esta errado");
+      }
+
+    } else {
+      setState(() {
+        _isNotValidate = true;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,20 +77,20 @@ class ResetPasswordPage extends StatelessWidget {
                         height: 200,
                         child: Image.asset("lib/assets/images/login_imagens/reset-password-icon.png"),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
-                      Text(
+                      const Text(
                         "Esqueceu sua senha?",
                         style: TextStyle(
                           fontSize: 32,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
-                      Text(
+                      const Text(
                         "Por favor, informe o E-mail associado a sua conta que enviaremos um link para o mesmo com as instruções para restauração de sua senha.",
                         style: TextStyle(
                           fontSize: 16,
@@ -58,24 +106,27 @@ class ResetPasswordPage extends StatelessWidget {
                   child: Column(
                     children: <Widget>[
                       TextFormField(
+                        controller: emailController,
                         keyboardType: TextInputType.emailAddress,
-                        decoration: InputDecoration(
+                        decoration:  InputDecoration(
+                          filled: true,
+                          errorText: _isNotValidate ? "Insira E-mail novamente" : null,
                           labelText: "E-mail",
-                          labelStyle: TextStyle(
+                          labelStyle: const TextStyle(
                             color: Colors.black38,
                             fontWeight: FontWeight.w400,
                             fontSize: 20,
                           ),
                         ),
-                        style: TextStyle(fontSize: 20),
+                        style: const TextStyle(fontSize: 20),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       Container(
                         height: 60,
                         alignment: Alignment.centerLeft,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           gradient: LinearGradient(
                             begin: Alignment.topLeft,
                             end: Alignment.bottomRight,
@@ -91,7 +142,7 @@ class ResetPasswordPage extends StatelessWidget {
                         ),
                         child: SizedBox.expand(
                           child: TextButton(
-                            child: Text(
+                            child: const Text(
                               "Enviar",
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
@@ -100,11 +151,13 @@ class ResetPasswordPage extends StatelessWidget {
                               ),
                               textAlign: TextAlign.center,
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              recoverPassword();
+                            },
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                     ],
