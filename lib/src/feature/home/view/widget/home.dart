@@ -32,9 +32,11 @@ class UserHome extends StatelessWidget {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              gerarListaComidas(pratos),
+              pratosItem(context),
             ],
           ),
         ));
   }
 }
+
+

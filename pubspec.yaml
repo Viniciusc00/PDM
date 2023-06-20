@@ -27,6 +27,7 @@ dependencies:
   google_fonts: ^4.0.4
   dart_jsonwebtoken: ^2.7.1
   jwt_decoder:
+  counter_button: ^1.0.1
 
 
 flutter_native_splash:
