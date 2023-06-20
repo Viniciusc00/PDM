@@ -40,7 +40,7 @@ class _HomePageState extends State<HomePage> {
         onTap: _navigateBottomNavBar,
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.shopping_cart), label: 'Carrinho'),
+          BottomNavigationBarItem(icon: Icon(Icons.menu_book), label: 'Reservas'),
           BottomNavigationBarItem(icon: Icon(Icons.account_circle_outlined), label: 'Account'),
         ],
         selectedItemColor: Colors.red,
