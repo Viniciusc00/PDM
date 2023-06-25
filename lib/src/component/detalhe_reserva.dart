@@ -1,3 +1,5 @@
+import 'package:appComida/src/component/reserva_mesa.dart';
+import 'package:appComida/src/feature/home/view/page/confirmacao_reserva.dart';
 import 'package:counter_button/counter_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -229,7 +231,7 @@ class _detalheReservaState extends State<detalheReserva> {
                 TextButton(
                           onPressed: () {
                             
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage() /*colocar o restaurante*/ ),);
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => ConfirmaReserva() /*colocar o restaurante*/ ),);
                           
                           },
                           child: const Text('Confirmar a reserva'),
