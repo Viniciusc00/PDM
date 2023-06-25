@@ -7,6 +7,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:appComida/src/feature/login/view/page/cadastro.dart';
 import 'package:appComida/src/feature/login/view/page/reset_password.dart';
 
+import '../../../home/view/widget/restaurantes.dart';
+
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
@@ -56,7 +58,7 @@ class _LoginPageState extends State<LoginPage> {
 
         prefs.setString('token', myToken);
 
-        Navigator.push(context,MaterialPageRoute(builder: (context)=>HomePage()));
+        Navigator.push(context,MaterialPageRoute(builder: (context)=>UserRestaurante()));
 
       }else{
         print("Algo esta errado");

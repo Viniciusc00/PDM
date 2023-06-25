@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import '../widget/account.dart';
 import '../widget/home.dart';
 import '../widget/cart.dart';
+import '../widget/restaurantes.dart';
+
 
 
 class HomePage extends StatefulWidget {
@@ -30,7 +32,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue,
+      backgroundColor: Colors.white,
       body: _pages[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
