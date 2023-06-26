@@ -23,15 +23,9 @@ class DefaultFirebaseOptions {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for ios - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return ios;
       case TargetPlatform.macOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for macos - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return macos;
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -65,5 +59,25 @@ class DefaultFirebaseOptions {
     messagingSenderId: '947849806236',
     projectId: 'projetopdm-9ce97',
     storageBucket: 'projetopdm-9ce97.appspot.com',
+  );
+
+  static const FirebaseOptions ios = FirebaseOptions(
+    apiKey: 'AIzaSyA0hBqU6sRP7AAYSzQPf09v-6g11nAU7Ig',
+    appId: '1:947849806236:ios:5e6197f14afec543470859',
+    messagingSenderId: '947849806236',
+    projectId: 'projetopdm-9ce97',
+    storageBucket: 'projetopdm-9ce97.appspot.com',
+    iosClientId: '947849806236-k541psl0ql4jfnsulg66eddo2nanufjk.apps.googleusercontent.com',
+    iosBundleId: 'com.example.appComida',
+  );
+
+  static const FirebaseOptions macos = FirebaseOptions(
+    apiKey: 'AIzaSyA0hBqU6sRP7AAYSzQPf09v-6g11nAU7Ig',
+    appId: '1:947849806236:ios:5e6197f14afec543470859',
+    messagingSenderId: '947849806236',
+    projectId: 'projetopdm-9ce97',
+    storageBucket: 'projetopdm-9ce97.appspot.com',
+    iosClientId: '947849806236-k541psl0ql4jfnsulg66eddo2nanufjk.apps.googleusercontent.com',
+    iosBundleId: 'com.example.appComida',
   );
 }
