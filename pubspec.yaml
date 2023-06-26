@@ -28,16 +28,10 @@ dependencies:
   dart_jsonwebtoken: ^2.7.1
   jwt_decoder:
   counter_button: ^1.0.1
+  firebase_core: ^2.14.0
+  cloud_firestore: ^4.8.1
+  firebase_auth: ^4.6.3
 
-
-flutter_native_splash:
-  color: "#FFFFFF"
-  background_image: "lib/assets/images/tela_inicial.png"
-  android: true
-  ios: true
-  android_gravity: center
-  ios_content_mode: center
-  fullscreen: true
 
 dev_dependencies:
   flutter_test:

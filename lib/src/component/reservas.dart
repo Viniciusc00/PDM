@@ -4,8 +4,8 @@ Widget reservas(BuildContext context){
   return Column(
     children: [
         ListTile(
-            title: Text('Restaurante', style: TextStyle(fontWeight: FontWeight.bold)),
-            subtitle: Padding(
+            title: const Text('Restaurante', style: TextStyle(fontWeight: FontWeight.bold)),
+            subtitle: const Padding(
               padding: EdgeInsets.only(top: 12.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -24,14 +24,14 @@ Widget reservas(BuildContext context){
                 ],
               ),
             ),
-            trailing: Icon(Icons.check_circle, color: Color.fromARGB(255, 43, 255, 0)),
-            contentPadding: EdgeInsets.all(15),
+            trailing: const Icon(Icons.check_circle, color: Color.fromARGB(255, 43, 255, 0)),
+            contentPadding: const EdgeInsets.all(15),
             onTap: () {
               
             },
             
           ),
-        Divider(),
+        const Divider(),
       ],
   );
 }

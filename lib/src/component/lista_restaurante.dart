@@ -1,17 +1,13 @@
-import 'package:appComida/src/component/reserva_mesa.dart';
-import 'package:appComida/src/feature/home/view/page/homepage.dart';
-import 'package:appComida/src/feature/home/view/widget/home.dart';
 import 'package:appComida/src/feature/home/view/widget/mesa.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+// ignore: implementation_imports
 
 
   Widget restaurante(BuildContext context) {
 
     return Column(
     children: [
-        Row(
+        const Row(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -26,7 +22,7 @@ import 'package:flutter/src/widgets/placeholder.dart';
                 ],
               ),
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 1, 0, 0),
+                        padding: const EdgeInsetsDirectional.fromSTEB(0, 1, 0, 0),
                         child: ListView(
                           padding: EdgeInsets.zero,
                           shrinkWrap: true,
@@ -34,11 +30,11 @@ import 'package:flutter/src/widgets/placeholder.dart';
                           children: [
                             Padding(
                               padding:
-                                  EdgeInsetsDirectional.fromSTEB(0, 0, 0, 1),
+                                  const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 1),
                               child: Container(
                                 width: 100,
                                 height: 72,
-                                decoration: BoxDecoration(
+                                decoration: const BoxDecoration(
                                   color: Color(0xffffffff),
                                   boxShadow: [
                                     BoxShadow(
@@ -49,7 +45,7 @@ import 'package:flutter/src/widgets/placeholder.dart';
                                   ],
                                 ),
                                 child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       16, 0, 16, 0),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
@@ -59,16 +55,16 @@ import 'package:flutter/src/widgets/placeholder.dart';
                                         width: 44,
                                         height: 44,
                                         decoration: BoxDecoration(
-                                          color: Color(0xFF616161f),
+                                          color: const Color(0xff616161f),
                                           shape: BoxShape.circle,
                                           border: Border.all(
-                                            color: Color(0xFF22282f),
+                                            color: const Color(0xFF22282f),
                                             width: 2,
                                           ),
                                         ),
                                         child: Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   2, 2, 2, 2),
                                           child: ClipRRect(
                                             borderRadius:
@@ -85,7 +81,7 @@ import 'package:flutter/src/widgets/placeholder.dart';
                                       Expanded(
                                         child: Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   12, 0, 0, 0),
                                           child: InkWell(
                                             splashColor: Colors.transparent,
@@ -93,7 +89,7 @@ import 'package:flutter/src/widgets/placeholder.dart';
                                             hoverColor: Colors.transparent,
                                             highlightColor: Colors.transparent,
                                             
-                                            child: Column(
+                                            child: const Column(
                                               mainAxisSize: MainAxisSize.max,
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
@@ -115,7 +111,7 @@ import 'package:flutter/src/widgets/placeholder.dart';
                                               ],
                                             ),
                                             onTap: () {
-                                              Navigator.push(context, MaterialPageRoute(builder: (context) => UserMesa() /*colocar o restaurante*/ ),);
+                                              Navigator.push(context, MaterialPageRoute(builder: (context) => const UserMesa() /*colocar o restaurante*/ ),);
                                              },
                                           ),
                                         ),
@@ -128,7 +124,7 @@ import 'package:flutter/src/widgets/placeholder.dart';
                           ] 
                         ),
                       ),
-        Divider(),
+        const Divider(),
       ],
   );
     

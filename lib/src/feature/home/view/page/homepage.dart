@@ -3,9 +3,6 @@ import 'package:flutter/material.dart';
 import '../widget/account.dart';
 import '../widget/home.dart';
 import '../widget/cart.dart';
-import '../widget/restaurantes.dart';
-
-
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -17,10 +14,10 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
 
-  static  final List<Widget> _pages = [
+  static final List<Widget> _pages = [
     UserHome(),
-    UserCarrinho(),
-    UserAccount(),
+    const UserCarrinho(),
+    const UserAccount(),
   ];
 
   void _navigateBottomNavBar(int index) {
@@ -42,8 +39,10 @@ class _HomePageState extends State<HomePage> {
         onTap: _navigateBottomNavBar,
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.menu_book), label: 'Reservas'),
-          BottomNavigationBarItem(icon: Icon(Icons.account_circle_outlined), label: 'Account'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.menu_book), label: 'Reservas'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.account_circle_outlined), label: 'Account'),
         ],
         selectedItemColor: Colors.red,
       ),

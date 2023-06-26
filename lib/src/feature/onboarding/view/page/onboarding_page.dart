@@ -1,5 +1,4 @@
 import 'package:appComida/assets/repository/onboarding_repository.dart';
-import 'package:appComida/src/feature/home/view/page/homepage.dart';
 import 'package:appComida/src/feature/login/view/page/login.dart';
 import 'package:appComida/src/feature/onboarding/view/page/app_style.dart';
 import 'package:appComida/src/feature/onboarding/view/page/size_configs.dart';
@@ -21,12 +20,13 @@ class OnboardingPage extends StatefulWidget {
 class _OnboardingPageState extends State<OnboardingPage> {
   int currentPage = 0;
 
+  // ignore: prefer_final_fields
   PageController _pageController = PageController(initialPage: 0);
 
   AnimatedContainer dotIndicator(index) {
     return AnimatedContainer(
-      margin: EdgeInsets.only(right: 5),
-      duration: Duration(microseconds: 400),
+      margin: const EdgeInsets.only(right: 5),
+      duration: const Duration(microseconds: 400),
       height: 12,
       width: 10,
       decoration: BoxDecoration(
@@ -42,7 +42,6 @@ class _OnboardingPageState extends State<OnboardingPage> {
   }
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     setSeenOnboard();
   }
@@ -50,7 +49,6 @@ class _OnboardingPageState extends State<OnboardingPage> {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-    double sizeH = SizeConfig.blockSizeH!;
     double sizeV = SizeConfig.blockSizeV!;
     return Scaffold(
       backgroundColor: Colors.white,
@@ -83,7 +81,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                   SizedBox(
                     height: sizeV * 3,
                   ),
-                  Container(
+                  SizedBox(
                     height: sizeV * 45,
                     child: Image.asset(
                       onboardingConteudos[index].image,
@@ -120,7 +118,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                         context, 
                         MaterialPageRoute(
                           builder: (context)=>
-                          LoginPage()));
+                          const LoginPage()));
                     },
                     bgColor: kPrimaryColor,
                     )
@@ -132,7 +130,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                         onPressed: () {
                           Navigator.push(context,
                           MaterialPageRoute(builder: (context) =>
-                          LoginPage()));
+                          const LoginPage()));
                         },
                       ),
                       Row(
@@ -142,7 +140,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                       OnBoardNavBtn(
                         name: 'Continuar', 
                         onPressed: () {
-                          _pageController.nextPage(duration: Duration(milliseconds: 400), curve: Curves.easeInOut);
+                          _pageController.nextPage(duration: const Duration(milliseconds: 400), curve: Curves.easeInOut);
                         }),
                     ],
                   ),

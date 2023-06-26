@@ -1,4 +1,3 @@
-import 'package:appComida/src/component/lista_restaurante.dart';
 import 'package:appComida/src/component/reserva_mesa.dart';
 import 'package:flutter/material.dart';
 
@@ -17,11 +16,11 @@ class _UserMesaState extends State<UserMesa> {
         appBar: AppBar(
           backgroundColor: Colors.red,
           automaticallyImplyLeading: false,
-          title: Text(
+          title: const Text(
             'Selecione um horário para sua reserva',
             style: TextStyle(color: Color(0xffffffff), fontSize: 20),
           ),
-          actions: [],
+          actions: const [],
           centerTitle: false,
           elevation: 0,
         ),

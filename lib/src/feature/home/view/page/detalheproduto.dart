@@ -2,9 +2,6 @@ import 'dart:ui';
 
 import 'package:counter_button/counter_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
-
 
 class DetalheProduto extends StatefulWidget {
   const DetalheProduto({super.key});
@@ -14,20 +11,19 @@ class DetalheProduto extends StatefulWidget {
 }
 
 class _DetalheProdutoState extends State<DetalheProduto> {
-
   int _counterValue = 0;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
-        body: Stack(
-          children: [
-            SizedBox(
-              width: double.infinity,
-              child: Image.asset("lib/assets/images/contrafile.png"),
-            ),
-            buttonArrow(context),
-            DraggableScrollableSheet(
+        child: Scaffold(
+      body: Stack(
+        children: [
+          SizedBox(
+            width: double.infinity,
+            child: Image.asset("lib/assets/images/contrafile.png"),
+          ),
+          buttonArrow(context),
+          DraggableScrollableSheet(
               initialChildSize: 0.6,
               maxChildSize: 1.0,
               minChildSize: 0.6,
@@ -38,8 +34,8 @@ class _DetalheProdutoState extends State<DetalheProduto> {
                   decoration: const BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
-                        topLeft: const Radius.circular(20),
-                        topRight: const Radius.circular(20)),
+                        topLeft: Radius.circular(20),
+                        topRight: Radius.circular(20)),
                   ),
                   child: SingleChildScrollView(
                     controller: scrollController,
@@ -59,7 +55,7 @@ class _DetalheProdutoState extends State<DetalheProduto> {
                             ],
                           ),
                         ),
-                        Text(
+                        const Text(
                           "Cacao Maca Walnut Milk",
                           style: TextStyle(fontSize: 30),
                         ),
@@ -76,14 +72,13 @@ class _DetalheProdutoState extends State<DetalheProduto> {
                         const SizedBox(
                           height: 15,
                         ),
-                        
                         const Padding(
                           padding: EdgeInsets.symmetric(vertical: 15),
                           child: Divider(
                             height: 4,
                           ),
                         ),
-                        Text(
+                        const Text(
                           "Description",
                           style: TextStyle(fontSize: 18),
                         ),
@@ -94,7 +89,7 @@ class _DetalheProdutoState extends State<DetalheProduto> {
                           'Your recipe has been uploaded, you can see it on your profile. Your recipe has been uploaded, you can see it on your',
                           style: Theme.of(context)
                               .textTheme
-                              .bodyText2!
+                              .bodyMedium!
                               .copyWith(color: Colors.black),
                         ),
                         const Padding(
@@ -103,7 +98,6 @@ class _DetalheProdutoState extends State<DetalheProduto> {
                             height: 4,
                           ),
                         ),
-                        
                         CounterButton(
                           loading: false,
                           onChange: (int val) {
@@ -116,67 +110,63 @@ class _DetalheProdutoState extends State<DetalheProduto> {
                           buttonColor: Colors.redAccent,
                           progressColor: Colors.redAccent,
                         ),
-
                         const Padding(
                           padding: EdgeInsets.symmetric(vertical: 15),
                           child: Divider(
                             height: 4,
                           ),
                         ),
-
                         TextButton(
                           onPressed: () {},
-                          child: const Text('Adicionar ao Carrinho'),
-                           style: TextButton.styleFrom(
+                          style: TextButton.styleFrom(
                             foregroundColor: Colors.white,
                             backgroundColor: Colors.red,
                             padding: const EdgeInsets.all(16.0),
                             textStyle: const TextStyle(fontSize: 20),
                           ),
-                          )
-                        
+                          child: const Text('Adicionar ao Carrinho'),
+                        )
                       ],
                     ),
                   ),
                 );
               })
-                ],
-              ),
-            )
-          );
-        }
+        ],
+      ),
+    ));
+  }
 }
 
 buttonArrow(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(20.0),
-      child: InkWell(
-        onTap: () {
-          Navigator.pop(context);
-        },
-        child: Container(
-          clipBehavior: Clip.hardEdge,
-          height: 55,
-          width: 55,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(25),
-          ),
-          child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-            child: Container(
-              height: 55,
-              width: 55,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(25),
-              ),
-              child: const Icon(
-                Icons.arrow_back_ios,
-                size: 20,
-                color: Colors.black,
-              ),
+  return Padding(
+    padding: const EdgeInsets.all(20.0),
+    child: InkWell(
+      onTap: () {
+        Navigator.pop(context);
+      },
+      child: Container(
+        clipBehavior: Clip.hardEdge,
+        height: 55,
+        width: 55,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(25),
+        ),
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+          child: Container(
+            height: 55,
+            width: 55,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(25),
+            ),
+            child: const Icon(
+              Icons.arrow_back_ios,
+              size: 20,
+              color: Colors.black,
             ),
           ),
         ),
       ),
-    );
-  }
+    ),
+  );
+}

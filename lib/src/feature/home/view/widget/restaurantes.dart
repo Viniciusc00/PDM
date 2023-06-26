@@ -14,13 +14,13 @@ class _UserRestauranteState extends State<UserRestaurante> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Color(0xffffffff),
+          backgroundColor: const Color(0xffffffff),
           automaticallyImplyLeading: false,
-          title: Text(
+          title: const Text(
             'Restaurantes ',
             style: TextStyle(color: Color(0xff1d2429), fontSize: 28),
           ),
-          actions: [],
+          actions: const [],
           centerTitle: false,
           elevation: 0,
         ),
