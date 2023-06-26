@@ -2,6 +2,9 @@ import 'package:appComida/src/feature/home/view/widget/mesa.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
+
+String ? restauranteSelecionado;
+
 Widget restaurante(BuildContext context) {
   return Column(
     children: [
@@ -125,6 +128,7 @@ Widget restaurante(BuildContext context) {
                                   ],
                                 ),
                                 onTap: () {
+                                  restauranteSelecionado = nome;
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
