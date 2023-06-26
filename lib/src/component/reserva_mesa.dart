@@ -6,7 +6,7 @@ Widget reservaMesa(BuildContext context) {
     children: [
       ListTile(
         title: const Text('18:00', style: TextStyle(fontWeight: FontWeight.bold)),
-        subtitle: const Padding(
+        subtitle:  Padding(
           padding: EdgeInsets.only(top: 12.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

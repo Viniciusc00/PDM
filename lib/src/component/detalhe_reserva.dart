@@ -1,4 +1,5 @@
 import 'package:appComida/src/feature/home/view/page/confirmacao_reserva.dart';
+import 'package:appComida/src/feature/home/view/page/homepage.dart';
 import 'package:counter_button/counter_button.dart';
 import 'package:flutter/material.dart';
 
@@ -65,7 +66,7 @@ class _detalheReservaState extends State<detalheReserva> {
                           )
                         ],
                       ),
-                      child: const Padding(
+                      child:  Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 16),
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
@@ -99,7 +100,7 @@ class _detalheReservaState extends State<detalheReserva> {
                       ),
                     ),
                   ),
-                  const Padding(
+                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(20, 15, 20, 0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
@@ -114,7 +115,7 @@ class _detalheReservaState extends State<detalheReserva> {
                       ],
                     ),
                   ),
-                  const Padding(
+                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(20, 16, 20, 0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
@@ -179,7 +180,7 @@ class _detalheReservaState extends State<detalheReserva> {
                       ),
                     ),
                   ),
-                  const Padding(
+                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(20, 15, 20, 0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
@@ -232,7 +233,7 @@ class _detalheReservaState extends State<detalheReserva> {
                         context,
                         MaterialPageRoute(
                             builder: (context) =>
-                                const ConfirmaReserva() /*colocar o restaurante*/),
+                                const HomePage() /*colocar o restaurante*/),
                       );
                     },
                     style: TextButton.styleFrom(

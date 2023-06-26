@@ -8,22 +8,23 @@ class UserMesa extends StatefulWidget {
   State<UserMesa> createState() => _UserMesaState();
 }
 
+PreferredSizeWidget _minhaBarra(String texto) {
+    return AppBar(
+        title: Text(texto,
+            style: const TextStyle(
+                color: Colors.white,
+                fontFamily: 'Outfit',
+                fontSize: 20)),
+        backgroundColor: Colors.red,
+        elevation: 0,
+        );
+  }
 
 class _UserMesaState extends State<UserMesa> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.red,
-          automaticallyImplyLeading: false,
-          title: const Text(
-            'Selecione um horário para sua reserva',
-            style: TextStyle(color: Color(0xffffffff), fontSize: 20),
-          ),
-          actions: const [],
-          centerTitle: false,
-          elevation: 0,
-        ),
+        appBar: _minhaBarra('Selecione o horario da reserva'),
         body: SingleChildScrollView(
           child: Column(
             children: [

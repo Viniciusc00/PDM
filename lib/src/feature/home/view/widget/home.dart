@@ -17,12 +17,7 @@ class UserHome extends StatelessWidget {
                 fontSize: 37)),
         backgroundColor: Colors.red,
         elevation: 0,
-        actions: <Widget>[
-          IconButton(
-            icon: const Icon(Icons.shopping_cart),
-            onPressed: () {},
-          ),
-        ]);
+        );
   }
 
   @override

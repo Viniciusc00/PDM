@@ -214,7 +214,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               child: SizedBox.expand(
                   child: TextButton(
-                child: const Row(
+                child:  Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     Text(

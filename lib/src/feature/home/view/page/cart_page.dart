@@ -1,16 +1,18 @@
-import 'package:appComida/src/component/lista_restaurante.dart';
-import 'package:flutter/material.dart';
 
-class UserRestaurante extends StatefulWidget {
-  const UserRestaurante({super.key});
+import 'package:appComida/src/component/cart.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter/src/widgets/placeholder.dart';
+
+class CartPage extends StatefulWidget {
+  const CartPage({super.key});
 
   @override
-  State<UserRestaurante> createState() => _UserRestauranteState();
+  State<CartPage> createState() => _CartPageState();
 }
 
 PreferredSizeWidget _minhaBarra(String texto) {
     return AppBar(
-      automaticallyImplyLeading: false,
         title: Text(texto,
             style: const TextStyle(
                 color: Colors.white,
@@ -21,15 +23,15 @@ PreferredSizeWidget _minhaBarra(String texto) {
         );
   }
 
-class _UserRestauranteState extends State<UserRestaurante> {
+class _CartPageState extends State<CartPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: _minhaBarra('Restaurantes'),
+        appBar: _minhaBarra("Carrinho"),
         body: SingleChildScrollView(
           child: Column(
             children: [
-              restaurante(context),
+              itemCarrinho(context),
             ],
           ),
         ));

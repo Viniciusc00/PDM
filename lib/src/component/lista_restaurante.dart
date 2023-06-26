@@ -8,12 +8,12 @@ String ? restauranteSelecionado;
 Widget restaurante(BuildContext context) {
   return Column(
     children: [
-      const Row(
+      Row(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(16, 0, 0, 12),
+            padding: EdgeInsetsDirectional.fromSTEB(16, 15, 0, 12),
             child: Text(
               'Selecione uma das opções abaixo:',
               style: TextStyle(color: Color(0xff1d2429), fontSize: 14),

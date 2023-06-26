@@ -13,8 +13,8 @@ PreferredSizeWidget _minhaBarra(String texto) {
         title: Text(texto,
             style: const TextStyle(
                 color: Colors.white,
-                fontFamily: 'PermanentMarker',
-                fontSize: 37)),
+                fontFamily: 'Outfit',
+                fontSize: 20)),
         backgroundColor: Colors.red,
         elevation: 0,
         );
@@ -24,7 +24,7 @@ class _UserCarrinhoState extends State<UserCarrinho> {
   @override
   Widget build(BuildContext context) {
       return Scaffold(
-        appBar: _minhaBarra("Laricão"),
+        appBar: _minhaBarra("Minhas reservas"),
         body: SingleChildScrollView(
           child: Column(
             children: [
