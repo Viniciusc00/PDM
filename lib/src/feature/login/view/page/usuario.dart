@@ -2,6 +2,8 @@
 import 'package:appComida/src/feature/login/view/page/login.dart';
 import 'package:flutter/material.dart';
 
+import '../../../home/view/widget/historico_reserva.dart';
+
 
 Widget itemUsuario(BuildContext context) {
   return Column(
@@ -116,15 +118,18 @@ Widget itemUsuario(BuildContext context) {
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          'Minhas reservas',
-                          style:
-                              TextStyle(
-                                    fontFamily: 'Plus Jakarta Sans',
-                                    color: Color(0xFF14181B),
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.normal,
-                                  ),
+                        TextButton(
+                          child: Text('Minhas reservas'),
+                          onPressed:() {
+                            Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                const UserCarrinho() /*colocar o restaurante*/),
+                      );
+                          },
+                          style: TextButton.styleFrom(
+                            foregroundColor: Color(0xFF14181B)),
                         ),
                       ],
                     ),
@@ -173,15 +178,18 @@ Widget itemUsuario(BuildContext context) {
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          'Alterar a senha',
-                          style:
-                              TextStyle(
-                                    fontFamily: 'Plus Jakarta Sans',
-                                    color: Color(0xFF14181B),
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.normal,
-                                  ),
+                        TextButton(
+                          child: Text('Alterar senha'),
+                          onPressed:() {
+                            Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                const UserCarrinho() /*colocar o restaurante*/),
+                      );
+                          },
+                          style: TextButton.styleFrom(
+                            foregroundColor: Color(0xFF14181B)),
                         ),
                       ],
                     ),

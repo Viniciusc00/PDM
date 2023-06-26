@@ -17,7 +17,6 @@ class _HomePageState extends State<HomePage> {
 
   static final List<Widget> _pages = [
     UserHome(),
-    const UserCarrinho(),
     const CartPage(),
     const UserAccount(),
   ];
@@ -41,8 +40,6 @@ class _HomePageState extends State<HomePage> {
         onTap: _navigateBottomNavBar,
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.menu_book), label: 'Reservas'),
           BottomNavigationBarItem(
               icon: const Icon(Icons.shopping_cart), label :'Carrinho'),
           BottomNavigationBarItem(

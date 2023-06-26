@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 
+import '../feature/home/view/widget/historico_reserva.dart';
+
 
   Widget itemCarrinho(BuildContext context) {
     return SingleChildScrollView(
@@ -167,6 +169,17 @@ import 'package:flutter/src/widgets/placeholder.dart';
                                 ),
                               ],
                             ),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                            },
+                            style: TextButton.styleFrom(
+                              foregroundColor: Colors.white,
+                              backgroundColor: Colors.red,
+                              padding: const EdgeInsets.all(16.0),
+                              textStyle: const TextStyle(fontSize: 20),
+                            ),
+                            child: const Text('Ir para o pagamento'),
                           ),
                         ],
                       ),
