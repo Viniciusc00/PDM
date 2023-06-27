@@ -76,7 +76,6 @@ class _LoginPageState extends State<LoginPage> {
         }
 
         prefs.setString('token', myToken);
-
         // ignore: use_build_context_synchronously
         Navigator.push(context,
             MaterialPageRoute(builder: (context) => const UserRestaurante()));

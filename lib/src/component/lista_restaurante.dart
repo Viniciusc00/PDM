@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 String? restauranteSelecionado;
+String? restauranteCorSelecionado;
 
 Widget restaurante(BuildContext context) {
   return Column(
@@ -46,6 +47,8 @@ Widget restaurante(BuildContext context) {
                 final descricao = document['descricao'];
                 final nome = document['nome'];
                 final urlLogo = document['url_logo'];
+                final cor_tema = document['cor_tema'];
+                final endereco = document['endereco'];
 
                 return Padding(
                   padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 1),
@@ -119,16 +122,31 @@ Widget restaurante(BuildContext context) {
                                             fontSize: 16),
                                       ),
                                     ),
+                                    
                                     Text(
                                       descricao,
                                       style: const TextStyle(
                                           color: Color(0xff1d2429),
                                           fontSize: 12),
                                     ),
+                                    Padding(
+                                      padding:
+                                          EdgeInsets.symmetric(vertical: 2),
+                                    ),
+                                    Padding(
+                                        padding: const EdgeInsetsDirectional
+                                            .fromSTEB(0, 0, 0, 4),
+                                        child: Text(
+                                          endereco,
+                                          style: const TextStyle(
+                                              color: Color(0xff1d2429),
+                                              fontSize: 12),
+                                        )),
                                   ],
                                 ),
                                 onTap: () {
                                   restauranteSelecionado = nome;
+                                  restauranteCorSelecionado = cor_tema;
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(

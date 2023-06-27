@@ -1,7 +1,11 @@
 import 'dart:ui';
 
+import 'package:app_comida/src/component/prato_item.dart';
+import 'package:app_comida/src/feature/home/view/page/homepage.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:counter_button/counter_button.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class DetalheProduto extends StatefulWidget {
   const DetalheProduto({super.key});
@@ -11,6 +15,23 @@ class DetalheProduto extends StatefulWidget {
 }
 
 class _DetalheProdutoState extends State<DetalheProduto> {
+
+  Future addCarrinho() async {
+    final docCliente = FirebaseFirestore.instance
+        .collection('cliente')
+        .doc('teste')
+        .collection('carrinho')
+        .doc(pratoNomeSelecionado);
+    var json = {
+      "nome": pratoNomeSelecionado,
+      "valor": pratoValorSelecionado,
+      "url": pratoImagemSelecionado
+    };
+
+    await docCliente.set(json);
+
+  }
+
   int _counterValue = 0;
   @override
   Widget build(BuildContext context) {
@@ -20,7 +41,7 @@ class _DetalheProdutoState extends State<DetalheProduto> {
         children: [
           SizedBox(
             width: double.infinity,
-            child: Image.asset("lib/assets/images/contrafile.png"),
+            child: Image.network(pratoImagemSelecionado!),
           ),
           buttonArrow(context),
           DraggableScrollableSheet(
@@ -55,15 +76,16 @@ class _DetalheProdutoState extends State<DetalheProduto> {
                             ],
                           ),
                         ),
-                        const Text(
-                          "Cacao Maca Walnut Milk",
+                        Text(
+                          pratoNomeSelecionado!,
                           style: TextStyle(fontSize: 30),
                         ),
                         const SizedBox(
                           height: 10,
                         ),
                         Text(
-                          "Food .60 min",
+                          NumberFormat('### minutos', 'pt_BR')
+                              .format(pratoTempSelecionado),
                           style: Theme.of(context)
                               .textTheme
                               .bodyMedium!
@@ -79,14 +101,14 @@ class _DetalheProdutoState extends State<DetalheProduto> {
                           ),
                         ),
                         const Text(
-                          "Description",
+                          "Descrição",
                           style: TextStyle(fontSize: 18),
                         ),
                         const SizedBox(
                           height: 10,
                         ),
                         Text(
-                          'Your recipe has been uploaded, you can see it on your profile. Your recipe has been uploaded, you can see it on your',
+                          pratoDescricaoSelecionado!,
                           style: Theme.of(context)
                               .textTheme
                               .bodyMedium!
@@ -117,7 +139,15 @@ class _DetalheProdutoState extends State<DetalheProduto> {
                           ),
                         ),
                         TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+
+                            addCarrinho();
+                            
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const HomePage()));
+                          },
                           style: TextButton.styleFrom(
                             foregroundColor: Colors.white,
                             backgroundColor: Colors.red,

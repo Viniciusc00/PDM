@@ -1,21 +1,40 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+
+import '../feature/home/view/page/pagamento.dart';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 Widget itemCarrinho(BuildContext context) {
-  return SingleChildScrollView(
-    child: Column(
-      mainAxisSize: MainAxisSize.max,
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
-          child: ListView(
-            padding: EdgeInsets.zero,
-            primary: false,
-            shrinkWrap: true,
-            scrollDirection: Axis.vertical,
-            children: [
-              Padding(
+  return StreamBuilder<QuerySnapshot>(
+    stream: FirebaseFirestore.instance
+        .collection('cliente')
+        .doc('teste')
+        .collection('carrinho')
+        .snapshots(),
+    builder: (context, snapshot) {
+      if (snapshot.hasError) {
+        return Text('Error: ${snapshot.error}');
+      }
+
+      if (!snapshot.hasData) {
+        return CircularProgressIndicator();
+      }
+
+      final documents = snapshot.data!.docs;
+
+      return SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ...documents.map((document) {
+              final url = document['url'];
+              final nome = document['nome'];
+              final valor = document['valor'];
+
+              return Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(16, 8, 16, 0),
                 child: Container(
                   width: double.infinity,
@@ -42,15 +61,15 @@ Widget itemCarrinho(BuildContext context) {
                           transitionOnUserGestures: true,
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(12),
-                            child: Image.asset(
-                              'lib/assets/images/login_imagens/L.png',
+                            child: Image.network(
+                              url,
                               width: 80,
                               height: 80,
                               fit: BoxFit.fitWidth,
                             ),
                           ),
                         ),
-                        const Expanded(
+                        Expanded(
                           child: Padding(
                             padding:
                                 EdgeInsetsDirectional.fromSTEB(12, 0, 0, 0),
@@ -63,7 +82,7 @@ Widget itemCarrinho(BuildContext context) {
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0, 0, 0, 8),
                                   child: Text(
-                                    'Costelinha ',
+                                    nome,
                                     style: TextStyle(
                                       fontFamily: 'Plus Jakarta Sans',
                                       color: Color(0xFF0F1113),
@@ -73,7 +92,8 @@ Widget itemCarrinho(BuildContext context) {
                                   ),
                                 ),
                                 Text(
-                                  'R\$80.00',
+                                  NumberFormat('### minutos', 'pt_BR')
+                                      .format(valor),
                                   style: TextStyle(
                                     fontFamily: 'Plus Jakarta Sans',
                                     color: Color(0xFF57636C),
@@ -99,59 +119,54 @@ Widget itemCarrinho(BuildContext context) {
                     ),
                   ),
                 ),
-              ),
-            ],
-          ),
-        ),
-        SingleChildScrollView(
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              const Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(24, 16, 24, 4),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Align(
-                      alignment: AlignmentDirectional(0, 0),
-                      child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(170, 0, 0, 0),
-                        child: Text(
-                          'Valor total:',
-                          style: TextStyle(
-                            fontFamily: 'Plus Jakarta Sans',
-                            color: Color(0xFF0F1113),
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(24, 4, 24, 12),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(200, 0, 0, 0),
+              );
+            }).toList(),
+            const Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(24, 16, 24, 4),
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Align(
+                    alignment: AlignmentDirectional(0, 0),
+                    child: Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(170, 0, 0, 0),
                       child: Text(
-                        '\$137.75',
+                        'Valor total:',
                         style: TextStyle(
-                          fontFamily: 'Outfit',
+                          fontFamily: 'Plus Jakarta Sans',
                           color: Color(0xFF0F1113),
-                          fontSize: 32,
+                          fontSize: 14,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-              TextButton(
+            ),
+            const Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(24, 4, 24, 12),
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(200, 0, 0, 0),
+                    child: Text(
+                      '\$137.75',
+                      style: TextStyle(
+                        fontFamily: 'Outfit',
+                        color: Color(0xFF0F1113),
+                        fontSize: 32,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Center(
+              child: TextButton(
                 onPressed: () {},
                 style: TextButton.styleFrom(
                   foregroundColor: Colors.white,
@@ -161,10 +176,13 @@ Widget itemCarrinho(BuildContext context) {
                 ),
                 child: const Text('Ir para o pagamento'),
               ),
-            ],
-          ),
+            ),
+            Padding(
+                      padding: EdgeInsets.symmetric(vertical: 14),
+                    ),
+          ],
         ),
-      ],
-    ),
+      );
+    },
   );
 }

@@ -1,6 +1,8 @@
 import 'package:app_comida/src/feature/home/view/page/homepage.dart';
 import 'package:flutter/material.dart';
 
+import '../widget/historico_reserva.dart';
+
 class ConfirmaReserva extends StatefulWidget {
   const ConfirmaReserva({super.key});
 
@@ -56,7 +58,7 @@ class _ConfirmaReservaState extends State<ConfirmaReserva> {
                         context,
                         MaterialPageRoute(
                             builder: (context) =>
-                                const HomePage() /*colocar o restaurante*/),
+                                const UserCarrinho()/*colocar o restaurante*/),
                       );
                     },
                     style: TextButton.styleFrom(
@@ -65,7 +67,7 @@ class _ConfirmaReservaState extends State<ConfirmaReserva> {
                       padding: const EdgeInsets.all(16.0),
                       textStyle: const TextStyle(fontSize: 20),
                     ),
-                    child: const Text('Ir para o cardápio'),
+                    child: const Text('Ver minhas reversas'),
                   )),
             ],
           ),

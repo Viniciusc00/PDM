@@ -1,9 +1,17 @@
+import 'dart:ffi';
+
 import 'package:app_comida/src/feature/home/view/page/detalheproduto.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import 'lista_restaurante.dart';
+
+String ? pratoDescricaoSelecionado;
+String ? pratoImagemSelecionado;
+String ? pratoNomeSelecionado;
+int pratoTempSelecionado = 0;
+int pratoValorSelecionado = 0;
 
 Widget pratosItem(BuildContext context) {
   return StreamBuilder<QuerySnapshot>(
@@ -27,8 +35,9 @@ Widget pratosItem(BuildContext context) {
         children: documents.map((doc) {
           final nomePrato = doc['nome'];
           final descricaoPrato = doc['descricao'];
-          final precoPrato = doc['preco'];
-          final urlImagem = doc['url_imagem'];
+          final precoPrato = doc['valor'];
+          final urlImagem = doc['url'];
+          final tempPrato = doc['tempPrep'];
 
           return Column(
             children: [
@@ -58,10 +67,17 @@ Widget pratosItem(BuildContext context) {
                     ],
                   ),
                 ),
-                leading: Image.network(urlImagem),
+                leading: Image.network(urlImagem,height: 70,width: 90,),
                 contentPadding: const EdgeInsets.all(15),
                 onTap: () {
                   print(restauranteSelecionado);
+
+                  pratoNomeSelecionado = nomePrato;
+                  pratoImagemSelecionado = urlImagem;
+                  pratoDescricaoSelecionado = descricaoPrato;
+                  pratoTempSelecionado = tempPrato;
+                  pratoValorSelecionado = precoPrato;
+
                   Navigator.push(
                     context,
                     MaterialPageRoute(
