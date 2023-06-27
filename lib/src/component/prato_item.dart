@@ -1,6 +1,7 @@
 import 'package:app_comida/src/feature/home/view/page/detalheproduto.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import 'lista_restaurante.dart';
 
@@ -46,7 +47,8 @@ Widget pratosItem(BuildContext context) {
                       Padding(
                         padding: const EdgeInsets.only(top: 24),
                         child: Text(
-                          precoPrato,
+                          NumberFormat('R\$ ###.00', 'pt_BR')
+                              .format(precoPrato),
                           style: const TextStyle(
                               fontSize: 15,
                               color: Colors.black,
