@@ -1,6 +1,6 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:appComida/src/feature/home/view/page/homepage.dart';
-import 'package:appComida/src/feature/home/viewmodel/home_viewmodel.dart';
+import 'package:app_comida/src/feature/home/view/page/homepage.dart';
+import 'package:app_comida/src/feature/home/viewmodel/home_viewmodel.dart';
 
 class HomeModule extends Module {
   @override

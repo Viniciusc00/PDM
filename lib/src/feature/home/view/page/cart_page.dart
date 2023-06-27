@@ -1,8 +1,5 @@
-
-import 'package:appComida/src/component/cart.dart';
+import 'package:app_comida/src/component/cart.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 
 class CartPage extends StatefulWidget {
   const CartPage({super.key});
@@ -12,16 +9,14 @@ class CartPage extends StatefulWidget {
 }
 
 PreferredSizeWidget _minhaBarra(String texto) {
-    return AppBar(
-        title: Text(texto,
-            style: const TextStyle(
-                color: Colors.white,
-                fontFamily: 'Outfit',
-                fontSize: 20)),
-        backgroundColor: Colors.red,
-        elevation: 0,
-        );
-  }
+  return AppBar(
+    title: Text(texto,
+        style: const TextStyle(
+            color: Colors.white, fontFamily: 'Outfit', fontSize: 20)),
+    backgroundColor: Colors.red,
+    elevation: 0,
+  );
+}
 
 class _CartPageState extends State<CartPage> {
   @override

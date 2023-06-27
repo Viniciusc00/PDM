@@ -1,5 +1,4 @@
-import 'package:appComida/src/feature/home/view/page/confirmacao_reserva.dart';
-import 'package:appComida/src/feature/home/view/page/homepage.dart';
+import 'package:app_comida/src/feature/home/view/page/homepage.dart';
 import 'package:counter_button/counter_button.dart';
 import 'package:flutter/material.dart';
 
@@ -29,8 +28,10 @@ class _detalheReservaState extends State<detalheReserva> {
             size: 24,
           ),
           onPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const UserRestaurante()));
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const UserRestaurante()));
           },
         ),
         title: const Text(
@@ -66,7 +67,7 @@ class _detalheReservaState extends State<detalheReserva> {
                           )
                         ],
                       ),
-                      child:  Padding(
+                      child: const Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 16),
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
@@ -100,7 +101,7 @@ class _detalheReservaState extends State<detalheReserva> {
                       ),
                     ),
                   ),
-                   Padding(
+                  const Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(20, 15, 20, 0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
@@ -115,7 +116,7 @@ class _detalheReservaState extends State<detalheReserva> {
                       ],
                     ),
                   ),
-                   Padding(
+                  const Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(20, 16, 20, 0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
@@ -133,7 +134,8 @@ class _detalheReservaState extends State<detalheReserva> {
                   Align(
                     alignment: const AlignmentDirectional(-0.7, 0),
                     child: Padding(
-                      padding: const EdgeInsetsDirectional.fromSTEB(8, 15, 8, 0),
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(8, 15, 8, 0),
                       child: SizedBox(
                         width: 250,
                         child: TextFormField(
@@ -174,13 +176,13 @@ class _detalheReservaState extends State<detalheReserva> {
                               borderRadius: BorderRadius.circular(8),
                             ),
                           ),
-                          style:
-                              const TextStyle(color: Color(0xff1d2429), fontSize: 14),
+                          style: const TextStyle(
+                              color: Color(0xff1d2429), fontSize: 14),
                         ),
                       ),
                     ),
                   ),
-                   Padding(
+                  const Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(20, 15, 20, 0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,

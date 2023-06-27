@@ -1,12 +1,13 @@
-import 'package:appComida/src/component/detalhe_reserva.dart';
+import 'package:app_comida/src/component/detalhe_reserva.dart';
 import 'package:flutter/material.dart';
 
 Widget reservaMesa(BuildContext context) {
   return Column(
     children: [
       ListTile(
-        title: const Text('18:00', style: TextStyle(fontWeight: FontWeight.bold)),
-        subtitle:  Padding(
+        title:
+            const Text('18:00', style: TextStyle(fontWeight: FontWeight.bold)),
+        subtitle: const Padding(
           padding: EdgeInsets.only(top: 12.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -21,8 +22,8 @@ Widget reservaMesa(BuildContext context) {
             ],
           ),
         ),
-        leading:
-            const Icon(Icons.check_circle, color: Color.fromARGB(255, 43, 255, 0)),
+        leading: const Icon(Icons.check_circle,
+            color: Color.fromARGB(255, 43, 255, 0)),
         contentPadding: const EdgeInsets.all(15),
         onTap: () {
           Navigator.push(

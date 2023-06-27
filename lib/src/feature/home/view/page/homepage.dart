@@ -1,9 +1,8 @@
-import 'package:appComida/src/feature/home/view/page/cart_page.dart';
+import 'package:app_comida/src/feature/home/view/page/cart_page.dart';
 import 'package:flutter/material.dart';
 
 import '../widget/account.dart';
 import '../widget/home.dart';
-import '../widget/historico_reserva.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -41,7 +40,7 @@ class _HomePageState extends State<HomePage> {
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(
-              icon: const Icon(Icons.shopping_cart), label :'Carrinho'),
+              icon: Icon(Icons.shopping_cart), label: 'Carrinho'),
           BottomNavigationBarItem(
               icon: Icon(Icons.account_circle_outlined), label: 'Account'),
         ],

@@ -1,14 +1,12 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:appComida/src/feature/login/view/page/cadastro.dart';
-import 'package:appComida/src/feature/login/view/page/reset_password.dart';
+import 'package:app_comida/src/feature/login/view/page/cadastro.dart';
+import 'package:app_comida/src/feature/login/view/page/reset_password.dart';
 
 import '../../../home/view/widget/restaurantes.dart';
-
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -51,7 +49,9 @@ class _LoginPageState extends State<LoginPage> {
         'iss': 'your_issuer',
         'sub': 'your_subject',
         'aud': 'your_audience',
-        'exp': DateTime.now().add(const Duration(hours: 1)).millisecondsSinceEpoch ~/
+        'exp': DateTime.now()
+                .add(const Duration(hours: 1))
+                .millisecondsSinceEpoch ~/
             1000,
         'iat': DateTime.now().millisecondsSinceEpoch ~/ 1000,
       },
@@ -78,8 +78,8 @@ class _LoginPageState extends State<LoginPage> {
         prefs.setString('token', myToken);
 
         // ignore: use_build_context_synchronously
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => const UserRestaurante()));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const UserRestaurante()));
       } else {
         if (kDebugMode) {
           print("Algo esta errado");
@@ -87,12 +87,13 @@ class _LoginPageState extends State<LoginPage> {
       }
     }
   }
-  
+
   @override
   void initState() {
     super.initState();
     initSharedPref();
   }
+
   void initSharedPref() async {
     prefs = await SharedPreferences.getInstance();
   }
@@ -139,16 +140,16 @@ class _LoginPageState extends State<LoginPage> {
               controller: emailController,
               keyboardType: TextInputType.emailAddress,
               validator: (value) {
-                        if (value == null || value == "") {
-                          return "O valor de e-mail deve ser preenchido";
-                        }
-                        if (!value.contains("@") ||
-                            !value.contains(".") ||
-                            value.length < 4) {
-                          return "O valor do e-mail deve ser válido";
-                        }
-                        return null;
-                      },
+                if (value == null || value == "") {
+                  return "O valor de e-mail deve ser preenchido";
+                }
+                if (!value.contains("@") ||
+                    !value.contains(".") ||
+                    value.length < 4) {
+                  return "O valor do e-mail deve ser válido";
+                }
+                return null;
+              },
               decoration: InputDecoration(
                 filled: true,
                 errorText: _isNotValidate ? "Insira nome novamente" : null,
@@ -170,11 +171,11 @@ class _LoginPageState extends State<LoginPage> {
               keyboardType: TextInputType.text,
               obscureText: true,
               validator: (value) {
-                        if (value == null || value.length < 6) {
-                          return "Insira uma senha válida.";
-                        }
-                        return null;
-                      },
+                if (value == null || value.length < 6) {
+                  return "Insira uma senha válida.";
+                }
+                return null;
+              },
               decoration: InputDecoration(
                 filled: true,
                 errorText: _isNotValidate ? "Insira nome novamente" : null,
@@ -214,7 +215,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               child: SizedBox.expand(
                   child: TextButton(
-                child:  Row(
+                child: const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     Text(

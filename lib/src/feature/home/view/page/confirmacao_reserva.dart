@@ -1,4 +1,4 @@
-import 'package:appComida/src/feature/home/view/page/homepage.dart';
+import 'package:app_comida/src/feature/home/view/page/homepage.dart';
 import 'package:flutter/material.dart';
 
 class ConfirmaReserva extends StatefulWidget {

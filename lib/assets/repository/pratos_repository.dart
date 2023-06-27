@@ -1,4 +1,4 @@
-import 'package:appComida/assets/models/pratos.dart';
+import 'package:app_comida/assets/models/pratos.dart';
 
 class PratosRepository {
   static List<Pratos> prato = [
@@ -32,8 +32,7 @@ class PratosRepository {
             'Costelinha ao estilo americano, assada por 8 horas no smoker com barbecue artesanal!',
         preco: 'R\$ 100,00',
         imagem:
-            'https://images.unsplash.com/photo-1544025162-d76694265947?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTd8fHN0ZWFrfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'
-    ),
+            'https://images.unsplash.com/photo-1544025162-d76694265947?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTd8fHN0ZWFrfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'),
     Pratos(
       nome: 'Clássico',
       descricao:
@@ -71,6 +70,5 @@ class PratosRepository {
       imagem:
           'https://images.unsplash.com/photo-1457460866886-40ef8d4b42a0?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mzd8fGJ1cmdlciUyMGNvbWJvfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
     ),
-
   ];
 }

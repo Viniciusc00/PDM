@@ -1,14 +1,13 @@
-import 'package:appComida/src/feature/home/view/widget/mesa.dart';
+import 'package:app_comida/src/feature/home/view/widget/mesa.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-
-String ? restauranteSelecionado;
+String? restauranteSelecionado;
 
 Widget restaurante(BuildContext context) {
   return Column(
     children: [
-      Row(
+      const Row(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
@@ -32,7 +31,7 @@ Widget restaurante(BuildContext context) {
             }
 
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return CircularProgressIndicator();
+              return const CircularProgressIndicator();
             }
 
             final documents = snapshot.data!.docs;
@@ -46,7 +45,7 @@ Widget restaurante(BuildContext context) {
                 final document = documents[index];
                 final descricao = document['descricao'];
                 final nome = document['nome'];
-                final url_logo = document['url_logo'];
+                final urlLogo = document['url_logo'];
 
                 return Padding(
                   padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 1),
@@ -87,7 +86,7 @@ Widget restaurante(BuildContext context) {
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(44),
                                 child: Image.network(
-                                  url_logo,
+                                  urlLogo,
                                   width: 44,
                                   height: 44,
                                   fit: BoxFit.cover,
@@ -110,18 +109,19 @@ Widget restaurante(BuildContext context) {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 0, 0, 4),
+                                      padding:
+                                          const EdgeInsetsDirectional.fromSTEB(
+                                              0, 0, 0, 4),
                                       child: Text(
                                         nome,
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             color: Color(0xff1d2429),
                                             fontSize: 16),
                                       ),
                                     ),
                                     Text(
                                       descricao,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           color: Color(0xff1d2429),
                                           fontSize: 12),
                                     ),

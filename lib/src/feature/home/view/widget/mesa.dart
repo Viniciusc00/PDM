@@ -1,4 +1,4 @@
-import 'package:appComida/src/component/reserva_mesa.dart';
+import 'package:app_comida/src/component/reserva_mesa.dart';
 import 'package:flutter/material.dart';
 
 class UserMesa extends StatefulWidget {
@@ -9,16 +9,14 @@ class UserMesa extends StatefulWidget {
 }
 
 PreferredSizeWidget _minhaBarra(String texto) {
-    return AppBar(
-        title: Text(texto,
-            style: const TextStyle(
-                color: Colors.white,
-                fontFamily: 'Outfit',
-                fontSize: 20)),
-        backgroundColor: Colors.red,
-        elevation: 0,
-        );
-  }
+  return AppBar(
+    title: Text(texto,
+        style: const TextStyle(
+            color: Colors.white, fontFamily: 'Outfit', fontSize: 20)),
+    backgroundColor: Colors.red,
+    elevation: 0,
+  );
+}
 
 class _UserMesaState extends State<UserMesa> {
   @override

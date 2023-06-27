@@ -1,11 +1,10 @@
-import 'package:appComida/assets/repository/onboarding_repository.dart';
-import 'package:appComida/src/feature/login/view/page/login.dart';
-import 'package:appComida/src/feature/onboarding/view/page/app_style.dart';
-import 'package:appComida/src/feature/onboarding/view/page/size_configs.dart';
-import 'package:appComida/src/main.dart';
+import 'package:app_comida/assets/repository/onboarding_repository.dart';
+import 'package:app_comida/src/feature/login/view/page/login.dart';
+import 'package:app_comida/src/feature/onboarding/view/page/app_style.dart';
+import 'package:app_comida/src/feature/onboarding/view/page/size_configs.dart';
+import 'package:app_comida/src/main.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 
 import '../widget/button_to_home.dart';
 import '../widget/navegation_button.dart';
@@ -36,10 +35,11 @@ class _OnboardingPageState extends State<OnboardingPage> {
     );
   }
 
-  Future setSeenOnboard()async {
+  Future setSeenOnboard() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     seenOnboard = await prefs.setBool('seenOnboard', true);
   }
+
   @override
   void initState() {
     super.initState();
@@ -111,39 +111,44 @@ class _OnboardingPageState extends State<OnboardingPage> {
               child: Column(
                 children: [
                   currentPage == onboardingConteudos.length - 1
-                  ? MyTextButton(
-                    buttoName: 'Ir ao Login',
-                    onPressed: (){
-                      Navigator.push(
-                        context, 
-                        MaterialPageRoute(
-                          builder: (context)=>
-                          const LoginPage()));
-                    },
-                    bgColor: kPrimaryColor,
-                    )
-                  : Row (
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      OnBoardNavBtn(
-                        name: 'Pular',
-                        onPressed: () {
-                          Navigator.push(context,
-                          MaterialPageRoute(builder: (context) =>
-                          const LoginPage()));
-                        },
-                      ),
-                      Row(
-                        children: List.generate(onboardingConteudos.length,
-                            (index) => dotIndicator(index)),
-                      ),
-                      OnBoardNavBtn(
-                        name: 'Continuar', 
-                        onPressed: () {
-                          _pageController.nextPage(duration: const Duration(milliseconds: 400), curve: Curves.easeInOut);
-                        }),
-                    ],
-                  ),
+                      ? MyTextButton(
+                          buttoName: 'Ir ao Login',
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const LoginPage()));
+                          },
+                          bgColor: kPrimaryColor,
+                        )
+                      : Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            OnBoardNavBtn(
+                              name: 'Pular',
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const LoginPage()));
+                              },
+                            ),
+                            Row(
+                              children: List.generate(
+                                  onboardingConteudos.length,
+                                  (index) => dotIndicator(index)),
+                            ),
+                            OnBoardNavBtn(
+                                name: 'Continuar',
+                                onPressed: () {
+                                  _pageController.nextPage(
+                                      duration:
+                                          const Duration(milliseconds: 400),
+                                      curve: Curves.easeInOut);
+                                }),
+                          ],
+                        ),
                 ],
               ))
         ],
@@ -151,6 +156,3 @@ class _OnboardingPageState extends State<OnboardingPage> {
     );
   }
 }
-
-
-
