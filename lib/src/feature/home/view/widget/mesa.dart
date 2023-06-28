@@ -11,11 +11,12 @@ class UserMesa extends StatefulWidget {
 }
 
 PreferredSizeWidget _minhaBarra(String texto) {
+  int cor = int.parse(restauranteCorSelecionado!);
   return AppBar(
     title: Text(texto,
         style: const TextStyle(
             color: Colors.white, fontFamily: 'Outfit', fontSize: 20)),
-    backgroundColor: Colors.red,
+    backgroundColor: Color(cor),
     elevation: 0,
   );
 }

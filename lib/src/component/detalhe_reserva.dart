@@ -8,7 +8,7 @@ import '../feature/home/view/widget/restaurantes.dart';
 
 // ignore: camel_case_types
 class detalheReserva extends StatefulWidget {
-  const detalheReserva({super.key});
+  const detalheReserva({Key? key}) : super(key: key);
 
   @override
   State<detalheReserva> createState() => _detalheReservaState();
@@ -67,9 +67,10 @@ class _detalheReservaState extends State<detalheReserva> {
 
   @override
   Widget build(BuildContext context) {
+    int cor = int.parse(restauranteCorSelecionado!);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.red,
+        backgroundColor: Color(cor),
         automaticallyImplyLeading: false,
         leading: IconButton(
           icon: const Icon(
@@ -118,8 +119,8 @@ class _detalheReservaState extends State<detalheReserva> {
                   child: Container(
                     width: double.infinity,
                     height: 100,
-                    decoration: const BoxDecoration(
-                      color: Colors.red,
+                    decoration: BoxDecoration(
+                      color: Color(cor),
                       boxShadow: [
                         BoxShadow(
                           blurRadius: 4,
@@ -280,55 +281,56 @@ class _detalheReservaState extends State<detalheReserva> {
                         });
                       },
                       count: _counterValue,
-                      countColor: Colors.red,
-                      buttonColor: Colors.redAccent,
-                      progressColor: Colors.redAccent,
+                      countColor: Color(cor),
+                      buttonColor: Color(cor),
+                      progressColor: Color(cor),
                     ),
                   ),
                 ),
                 Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(0, 40, 0, 16),
-                    child: TextButton(
-                      onPressed: () async {
-                        final selectedTimestamp =
-                            DateTime.parse('2023-06-26 18:00:00').toUtc();
+                  padding: const EdgeInsetsDirectional.fromSTEB(0, 40, 0, 16),
+                  child: TextButton(
+                    onPressed: () async {
+                      final selectedTimestamp =
+                          DateTime.parse('2023-06-26 18:00:00').toUtc();
 
-                        final reservationData = {
-                          'restaurante_nome': restauranteSelecionado,
-                          'cliente_email': 'teste',
-                          'qtd_mesas': _counterValue,
-                          'data_e_horario': selectedTimestamp,
-                          'observacao': _observacaoController.text,
-                        };
+                      final reservationData = {
+                        'restaurante_nome': restauranteSelecionado,
+                        'cliente_email': 'teste',
+                        'qtd_mesas': _counterValue,
+                        'data_e_horario': selectedTimestamp,
+                        'observacao': _observacaoController.text,
+                      };
 
-                        try {
-                          await FirebaseFirestore.instance
-                              .doc([
-                                restauranteSelecionado,
-                                'teste',
-                                selectedTimestamp
-                              ].join('|'))
-                              .set(reservationData);
-                          print('Reservation created successfully.');
-                        } catch (error) {
-                          print('Error creating reservation: $error');
-                        }
+                      try {
+                        await FirebaseFirestore.instance
+                            .doc([
+                              restauranteSelecionado,
+                              'teste',
+                              selectedTimestamp
+                            ].join('|'))
+                            .set(reservationData);
+                        print('Reservation created successfully.');
+                      } catch (error) {
+                        print('Error creating reservation: $error');
+                      }
 
-                        // Navigate to the desired page
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const HomePage()),
-                        );
-                      },
-                      style: TextButton.styleFrom(
-                        foregroundColor: Colors.white,
-                        backgroundColor: Colors.red,
-                        padding: const EdgeInsets.all(16.0),
-                        textStyle: const TextStyle(fontSize: 20),
-                      ),
-                      child: const Text('Confirmar a reserva'),
-                    )),
+                      // Navigate to the desired page
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const HomePage()),
+                      );
+                    },
+                    style: TextButton.styleFrom(
+                      foregroundColor: Colors.white,
+                      backgroundColor: Color(cor),
+                      padding: const EdgeInsets.all(16.0),
+                      textStyle: const TextStyle(fontSize: 20),
+                    ),
+                    child: const Text('Confirmar a reserva'),
+                  ),
+                ),
               ],
             ),
           ),

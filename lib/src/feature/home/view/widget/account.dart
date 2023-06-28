@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../component/lista_restaurante.dart';
 import '../../../login/view/page/usuario.dart';
 
 class UserAccount extends StatefulWidget {
@@ -10,16 +11,15 @@ class UserAccount extends StatefulWidget {
 }
 
 PreferredSizeWidget _minhaBarra(String texto) {
-    return AppBar(
-        title: Text(texto,
-            style: const TextStyle(
-                color: Colors.white,
-                fontFamily: 'PermanentMarker',
-                fontSize: 37)),
-        backgroundColor: Colors.red,
-        elevation: 0,
-        );
-  }
+  int cor = int.parse(restauranteCorSelecionado!);
+  return AppBar(
+    title: Text(texto,
+        style: const TextStyle(
+            color: Colors.white, fontFamily: 'PermanentMarker', fontSize: 37)),
+    backgroundColor: Color(cor),
+    elevation: 0,
+  );
+}
 
 class _UserAccountState extends State<UserAccount> {
   @override

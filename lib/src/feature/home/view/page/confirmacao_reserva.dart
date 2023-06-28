@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../component/lista_restaurante.dart';
 import '../widget/historico_reserva.dart';
 
 class ConfirmaReserva extends StatefulWidget {
@@ -10,6 +11,7 @@ class ConfirmaReserva extends StatefulWidget {
 }
 
 class _ConfirmaReservaState extends State<ConfirmaReserva> {
+  int cor = int.parse(restauranteCorSelecionado!);
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -62,7 +64,7 @@ class _ConfirmaReservaState extends State<ConfirmaReserva> {
                     },
                     style: TextButton.styleFrom(
                       foregroundColor: Colors.white,
-                      backgroundColor: Colors.red,
+                      backgroundColor: Color(cor),
                       padding: const EdgeInsets.all(16.0),
                       textStyle: const TextStyle(fontSize: 20),
                     ),

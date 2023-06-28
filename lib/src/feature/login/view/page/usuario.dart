@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 
+import '../../../../component/lista_restaurante.dart';
 import '../../../home/view/widget/historico_reserva.dart';
 
 Widget itemUsuario(BuildContext context) {
+  int cor = int.parse(restauranteCorSelecionado!);
   return Column(
     children: [
       Container(
         width: MediaQuery.of(context).size.width,
         height: 120,
-        decoration: const BoxDecoration(
-          color: Colors.red,
+        decoration: BoxDecoration(
+          color: Color(cor),
         ),
         child: Padding(
           padding: const EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
@@ -197,7 +199,7 @@ Widget itemUsuario(BuildContext context) {
             onPressed: () {},
             style: TextButton.styleFrom(
               foregroundColor: Colors.white,
-              backgroundColor: Colors.red,
+              backgroundColor: Color(cor),
               padding: const EdgeInsets.all(16.0),
               textStyle: const TextStyle(fontSize: 20),
             ),

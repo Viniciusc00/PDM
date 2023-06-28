@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import '../feature/home/view/page/pagamento.dart';
+import 'lista_restaurante.dart';
 
 class ItemCarrinho extends StatefulWidget {
   @override
@@ -10,16 +11,18 @@ class ItemCarrinho extends StatefulWidget {
 }
 
 PreferredSizeWidget _minhaBarra(String texto) {
+  int cor = int.parse(restauranteCorSelecionado!);
   return AppBar(
     title: Text(texto,
         style: const TextStyle(
             color: Colors.white, fontFamily: 'Outfit', fontSize: 20)),
-    backgroundColor: Colors.red,
+    backgroundColor: Color(cor),
     elevation: 0,
   );
 }
 
 class _ItemCarrinhoState extends State<ItemCarrinho> {
+  int cor = int.parse(restauranteCorSelecionado!);
   int somatorio = 0;
 
   Future<int> somarValores() async {
@@ -283,7 +286,7 @@ class _ItemCarrinhoState extends State<ItemCarrinho> {
                           },
                           style: TextButton.styleFrom(
                             foregroundColor: Colors.white,
-                            backgroundColor: Colors.red,
+                            backgroundColor: Color(cor),
                             padding: const EdgeInsets.all(16.0),
                             textStyle: const TextStyle(fontSize: 20),
                           ),

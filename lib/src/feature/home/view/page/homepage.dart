@@ -1,5 +1,4 @@
 import 'package:app_comida/src/component/cart.dart';
-import 'package:app_comida/src/feature/home/view/page/cart_page.dart';
 import 'package:flutter/material.dart';
 
 import '../widget/account.dart';

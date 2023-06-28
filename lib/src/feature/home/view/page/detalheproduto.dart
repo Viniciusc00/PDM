@@ -6,6 +6,8 @@ import 'package:counter_button/counter_button.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import '../../../../component/lista_restaurante.dart';
+
 class DetalheProduto extends StatefulWidget {
   const DetalheProduto({super.key});
 
@@ -14,6 +16,7 @@ class DetalheProduto extends StatefulWidget {
 }
 
 class _DetalheProdutoState extends State<DetalheProduto> {
+  int cor = int.parse(restauranteCorSelecionado!);
 
   Future addCarrinho() async {
     final docCliente = FirebaseFirestore.instance
@@ -24,12 +27,11 @@ class _DetalheProdutoState extends State<DetalheProduto> {
     var json = {
       "nome": pratoNomeSelecionado,
       "valor": pratoValorSelecionado,
-      "url": pratoImagemSelecionado, 
+      "url": pratoImagemSelecionado,
       "quantidade": _counterValue
     };
 
     await docCliente.set(json);
-
   }
 
   int _counterValue = 0;
@@ -128,9 +130,9 @@ class _DetalheProdutoState extends State<DetalheProduto> {
                             });
                           },
                           count: _counterValue,
-                          countColor: Colors.red,
-                          buttonColor: Colors.redAccent,
-                          progressColor: Colors.redAccent,
+                          countColor: Color(cor),
+                          buttonColor: Color(cor),
+                          progressColor: Color(cor),
                         ),
                         const Padding(
                           padding: EdgeInsets.symmetric(vertical: 15),
@@ -140,7 +142,6 @@ class _DetalheProdutoState extends State<DetalheProduto> {
                         ),
                         TextButton(
                           onPressed: () {
-
                             addCarrinho();
                             Navigator.push(
                                 context,
@@ -149,7 +150,7 @@ class _DetalheProdutoState extends State<DetalheProduto> {
                           },
                           style: TextButton.styleFrom(
                             foregroundColor: Colors.white,
-                            backgroundColor: Colors.red,
+                            backgroundColor: Color(cor),
                             padding: const EdgeInsets.all(16.0),
                             textStyle: const TextStyle(fontSize: 20),
                           ),
