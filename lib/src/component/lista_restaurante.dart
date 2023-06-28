@@ -2,10 +2,7 @@ import 'package:app_comida/src/feature/home/view/widget/mesa.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-String? restauranteSelecionado;
-String? restauranteCorSelecionado;
-
-Widget restaurante(BuildContext context) {
+Widget restaurante(BuildContext context, String email) {
   return Column(
     children: [
       const Row(
@@ -122,7 +119,6 @@ Widget restaurante(BuildContext context) {
                                             fontSize: 16),
                                       ),
                                     ),
-                                    
                                     Text(
                                       descricao,
                                       style: const TextStyle(
@@ -145,12 +141,13 @@ Widget restaurante(BuildContext context) {
                                   ],
                                 ),
                                 onTap: () {
-                                  restauranteSelecionado = nome;
-                                  restauranteCorSelecionado = cor_tema;
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => const UserMesa(),
+                                      builder: (context) => UserMesa(
+                                          email: email,
+                                          nomeRestaurante: nome,
+                                          corRestaurante: int.parse(cor_tema!)),
                                     ),
                                   );
                                 },

@@ -1,7 +1,8 @@
 import 'package:app_comida/src/component/detalhe_reserva.dart';
 import 'package:flutter/material.dart';
 
-Widget reservaMesa(BuildContext context, int mesasDisponiveis) {
+Widget reservaMesa(BuildContext context, int mesasDisponiveis, String email,
+    String nomeRestaurante, int corRestaurante) {
   final isDisponivel = mesasDisponiveis > 0;
 
   return Column(
@@ -32,7 +33,12 @@ Widget reservaMesa(BuildContext context, int mesasDisponiveis) {
             ? () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => detalheReserva()),
+                  MaterialPageRoute(
+                      builder: (context) => detalheReserva(
+                            email: email,
+                            nomeRestaurante: nomeRestaurante,
+                            corRestaurante: corRestaurante,
+                          )),
                 );
               }
             : null,

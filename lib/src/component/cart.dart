@@ -3,32 +3,39 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import '../feature/home/view/page/pagamento.dart';
-import 'lista_restaurante.dart';
 
 class ItemCarrinho extends StatefulWidget {
+  final String email;
+  final String nomeRestaurante;
+  final int corRestaurante;
+  ItemCarrinho(
+      {super.key,
+      required this.email,
+      required this.nomeRestaurante,
+      required this.corRestaurante});
   @override
   _ItemCarrinhoState createState() => _ItemCarrinhoState();
 }
 
-PreferredSizeWidget _minhaBarra(String texto) {
-  int cor = int.parse(restauranteCorSelecionado!);
+PreferredSizeWidget _minhaBarra(String texto, int corRestaurante) {
   return AppBar(
+    automaticallyImplyLeading: false,
     title: Text(texto,
         style: const TextStyle(
             color: Colors.white, fontFamily: 'Outfit', fontSize: 20)),
-    backgroundColor: Color(cor),
+    backgroundColor: Color(corRestaurante),
     elevation: 0,
   );
 }
 
 class _ItemCarrinhoState extends State<ItemCarrinho> {
-  int cor = int.parse(restauranteCorSelecionado!);
   int somatorio = 0;
 
   Future<int> somarValores() async {
     final QuerySnapshot snapshot = await FirebaseFirestore.instance
         .collection('reserva')
-        .doc('Panama|teste|2023-06-26 18:00:00.000Z')
+        .doc([widget.nomeRestaurante, widget.email, '2023-06-26 18:00:00.000Z']
+            .join('|'))
         .collection('carrinho')
         .get();
 
@@ -61,7 +68,8 @@ class _ItemCarrinhoState extends State<ItemCarrinho> {
   Future deleteCarrinho(final nome) async {
     final docCliente = FirebaseFirestore.instance
         .collection('reserva')
-        .doc('Panama|teste|2023-06-26 18:00:00.000Z')
+        .doc([widget.nomeRestaurante, widget.email, '2023-06-26 18:00:00.000Z']
+            .join('|'))
         .collection('carrinho')
         .doc(nome);
 
@@ -77,14 +85,18 @@ class _ItemCarrinhoState extends State<ItemCarrinho> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _minhaBarra("Carrinho"),
+      appBar: _minhaBarra("Carrinho", widget.corRestaurante),
       body: SingleChildScrollView(
         child: Column(
           children: [
             StreamBuilder<QuerySnapshot>(
               stream: FirebaseFirestore.instance
                   .collection('reserva')
-                  .doc('Panama|teste|2023-06-26 18:00:00.000Z')
+                  .doc([
+                    widget.nomeRestaurante,
+                    widget.email,
+                    '2023-06-26 18:00:00.000Z'
+                  ].join('|'))
                   .collection('carrinho')
                   .snapshots(),
               builder: (context, snapshot) {
@@ -280,13 +292,16 @@ class _ItemCarrinhoState extends State<ItemCarrinho> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => PagamentoPage(),
+                                builder: (context) => PagamentoPage(
+                                    email: widget.email,
+                                    nomeRestaurante: widget.nomeRestaurante,
+                                    corRestaurante: widget.corRestaurante),
                               ),
                             );
                           },
                           style: TextButton.styleFrom(
                             foregroundColor: Colors.white,
-                            backgroundColor: Color(cor),
+                            backgroundColor: Color(widget.corRestaurante),
                             padding: const EdgeInsets.all(16.0),
                             textStyle: const TextStyle(fontSize: 20),
                           ),

@@ -4,23 +4,28 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
-import '../../../../component/lista_restaurante.dart';
 import 'confirmacao_reserva.dart';
 
 class PagamentoPage extends StatefulWidget {
-  const PagamentoPage({super.key});
+  final String email;
+  final String nomeRestaurante;
+  final int corRestaurante;
+  PagamentoPage(
+      {super.key,
+      required this.email,
+      required this.nomeRestaurante,
+      required this.corRestaurante});
 
   @override
   State<PagamentoPage> createState() => _PagamentoPageState();
 }
 
-PreferredSizeWidget _minhaBarra(String texto) {
-  int cor = int.parse(restauranteCorSelecionado!);
+PreferredSizeWidget _minhaBarra(String texto, int corRestaurante) {
   return AppBar(
     title: Text(texto,
         style: const TextStyle(
             color: Colors.white, fontFamily: 'Outfit', fontSize: 20)),
-    backgroundColor: Color(cor),
+    backgroundColor: Color(corRestaurante),
     elevation: 0,
   );
 }
@@ -45,11 +50,10 @@ class _PagamentoPageState extends State<PagamentoPage> {
   */
   @override
   Widget build(BuildContext context) {
-    int cor = int.parse(restauranteCorSelecionado!);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Color(cor),
+        backgroundColor: Color(widget.corRestaurante),
         title: Text(
           'Pagamento',
           style: TextStyle(
@@ -131,14 +135,14 @@ class _PagamentoPageState extends State<PagamentoPage> {
                                 ),
                                 errorBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
-                                    color: Color(cor),
+                                    color: Color(widget.corRestaurante),
                                     width: 2,
                                   ),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 focusedErrorBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
-                                    color: Color(cor),
+                                    color: Color(widget.corRestaurante),
                                     width: 2,
                                   ),
                                   borderRadius: BorderRadius.circular(8),
@@ -197,14 +201,14 @@ class _PagamentoPageState extends State<PagamentoPage> {
                                 ),
                                 errorBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
-                                    color: Color(cor),
+                                    color: Color(widget.corRestaurante),
                                     width: 2,
                                   ),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 focusedErrorBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
-                                    color: Color(cor),
+                                    color: Color(widget.corRestaurante),
                                     width: 2,
                                   ),
                                   borderRadius: BorderRadius.circular(8),
@@ -263,14 +267,14 @@ class _PagamentoPageState extends State<PagamentoPage> {
                                 ),
                                 errorBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
-                                    color: Color(cor),
+                                    color: Color(widget.corRestaurante),
                                     width: 2,
                                   ),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 focusedErrorBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
-                                    color: Color(cor),
+                                    color: Color(widget.corRestaurante),
                                     width: 2,
                                   ),
                                   borderRadius: BorderRadius.circular(8),
@@ -329,14 +333,14 @@ class _PagamentoPageState extends State<PagamentoPage> {
                                 ),
                                 errorBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
-                                    color: Color(cor),
+                                    color: Color(widget.corRestaurante),
                                     width: 2,
                                   ),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 focusedErrorBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
-                                    color: Color(cor),
+                                    color: Color(widget.corRestaurante),
                                     width: 2,
                                   ),
                                   borderRadius: BorderRadius.circular(8),
@@ -364,13 +368,16 @@ class _PagamentoPageState extends State<PagamentoPage> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) =>
-                                    ConfirmaReserva() /*colocar o restaurante*/),
+                                builder: (context) => ConfirmaReserva(
+                                      email: widget.email,
+                                      nomeRestaurante: widget.nomeRestaurante,
+                                      corRestaurante: widget.corRestaurante,
+                                    ) /*colocar o restaurante*/),
                           );
                         },
                         style: TextButton.styleFrom(
                           foregroundColor: Colors.white,
-                          backgroundColor: Color(cor),
+                          backgroundColor: Color(widget.corRestaurante),
                           padding: const EdgeInsets.all(16.0),
                           textStyle: const TextStyle(fontSize: 20),
                         ),

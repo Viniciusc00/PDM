@@ -1,22 +1,20 @@
-
 import 'package:app_comida/src/feature/home/view/page/detalheproduto.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import 'lista_restaurante.dart';
-
-String ? pratoDescricaoSelecionado;
-String ? pratoImagemSelecionado;
-String ? pratoNomeSelecionado;
+String? pratoDescricaoSelecionado;
+String? pratoImagemSelecionado;
+String? pratoNomeSelecionado;
 int pratoTempSelecionado = 0;
 int pratoValorSelecionado = 0;
 
-Widget pratosItem(BuildContext context) {
+Widget pratosItem(BuildContext context, String email, String nomeRestaurante,
+    int corRestaurante) {
   return StreamBuilder<QuerySnapshot>(
     stream: FirebaseFirestore.instance
         .collection('restaurante')
-        .doc(restauranteSelecionado)
+        .doc(nomeRestaurante)
         .collection('pratos')
         .snapshots(),
     builder: (context, snapshot) {
@@ -66,10 +64,14 @@ Widget pratosItem(BuildContext context) {
                     ],
                   ),
                 ),
-                leading: Image.network(urlImagem,height: 70,width: 90,),
+                leading: Image.network(
+                  urlImagem,
+                  height: 70,
+                  width: 90,
+                ),
                 contentPadding: const EdgeInsets.all(15),
                 onTap: () {
-                  print(restauranteSelecionado);
+                  print(nomeRestaurante);
 
                   pratoNomeSelecionado = nomePrato;
                   pratoImagemSelecionado = urlImagem;
@@ -80,7 +82,11 @@ Widget pratosItem(BuildContext context) {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const DetalheProduto()),
+                        builder: (context) => DetalheProduto(
+                              email: email,
+                              nomeRestaurante: nomeRestaurante,
+                              corRestaurante: corRestaurante,
+                            )),
                   );
                 },
               ),

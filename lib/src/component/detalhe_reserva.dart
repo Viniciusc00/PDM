@@ -1,4 +1,3 @@
-import 'package:app_comida/src/component/lista_restaurante.dart';
 import 'package:app_comida/src/feature/home/view/page/homepage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:counter_button/counter_button.dart';
@@ -8,7 +7,14 @@ import '../feature/home/view/widget/restaurantes.dart';
 
 // ignore: camel_case_types
 class detalheReserva extends StatefulWidget {
-  const detalheReserva({Key? key}) : super(key: key);
+  final String email;
+  final String nomeRestaurante;
+  final int corRestaurante;
+  detalheReserva(
+      {super.key,
+      required this.email,
+      required this.nomeRestaurante,
+      required this.corRestaurante});
 
   @override
   State<detalheReserva> createState() => _detalheReservaState();
@@ -30,14 +36,14 @@ class _detalheReservaState extends State<detalheReserva> {
     try {
       final snapshot = await FirebaseFirestore.instance
           .collection('restaurante')
-          .doc(restauranteSelecionado)
+          .doc(widget.nomeRestaurante)
           .get();
 
       final data = snapshot.data();
       final reservaSnapshot = await FirebaseFirestore.instance
           .collection('reserva')
-          .where('cliente_email', isEqualTo: 'teste')
-          .where('restaurante_nome', isEqualTo: restauranteSelecionado)
+          .where('cliente_email', isEqualTo: widget.email)
+          .where('restaurante_nome', isEqualTo: widget.nomeRestaurante)
           .get();
 
       int sum = 0;
@@ -67,10 +73,9 @@ class _detalheReservaState extends State<detalheReserva> {
 
   @override
   Widget build(BuildContext context) {
-    int cor = int.parse(restauranteCorSelecionado!);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(cor),
+        backgroundColor: Color(widget.corRestaurante),
         automaticallyImplyLeading: false,
         leading: IconButton(
           icon: const Icon(
@@ -81,7 +86,8 @@ class _detalheReservaState extends State<detalheReserva> {
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const UserRestaurante()),
+              MaterialPageRoute(
+                  builder: (context) => UserRestaurante(email: widget.email)),
             );
           },
         ),
@@ -120,7 +126,7 @@ class _detalheReservaState extends State<detalheReserva> {
                     width: double.infinity,
                     height: 100,
                     decoration: BoxDecoration(
-                      color: Color(cor),
+                      color: Color(widget.corRestaurante),
                       boxShadow: [
                         BoxShadow(
                           blurRadius: 4,
@@ -281,9 +287,9 @@ class _detalheReservaState extends State<detalheReserva> {
                         });
                       },
                       count: _counterValue,
-                      countColor: Color(cor),
-                      buttonColor: Color(cor),
-                      progressColor: Color(cor),
+                      countColor: Color(widget.corRestaurante),
+                      buttonColor: Color(widget.corRestaurante),
+                      progressColor: Color(widget.corRestaurante),
                     ),
                   ),
                 ),
@@ -293,38 +299,44 @@ class _detalheReservaState extends State<detalheReserva> {
                     onPressed: () async {
                       final selectedTimestamp =
                           DateTime.parse('2023-06-26 18:00:00').toUtc();
+                      final doc_id = [
+                        widget.nomeRestaurante,
+                        widget.email,
+                        selectedTimestamp.toString()
+                      ].join('|');
 
                       final reservationData = {
-                        'restaurante_nome': restauranteSelecionado,
-                        'cliente_email': 'teste',
+                        'restaurante_nome': widget.nomeRestaurante,
+                        'cliente_email': widget.email,
                         'qtd_mesas': _counterValue,
                         'data_e_horario': selectedTimestamp,
                         'observacao': _observacaoController.text,
                       };
 
                       try {
-                        await FirebaseFirestore.instance
-                            .doc([
-                              restauranteSelecionado,
-                              'teste',
-                              selectedTimestamp
-                            ].join('|'))
-                            .set(reservationData);
-                        print('Reservation created successfully.');
+                        final collectionRef =
+                            FirebaseFirestore.instance.collection('reserva');
+                        await collectionRef
+                            .doc(doc_id)
+                            .set(reservationData, SetOptions(merge: true));
+                        print('Reservation created or updated successfully.');
                       } catch (error) {
-                        print('Error creating reservation: $error');
+                        print('Error creating or updating reservation: $error');
                       }
 
                       // Navigate to the desired page
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const HomePage()),
+                            builder: (context) => HomePage(
+                                email: widget.email,
+                                nomeRestaurante: widget.nomeRestaurante,
+                                corRestaurante: widget.corRestaurante)),
                       );
                     },
                     style: TextButton.styleFrom(
                       foregroundColor: Colors.white,
-                      backgroundColor: Color(cor),
+                      backgroundColor: Color(widget.corRestaurante),
                       padding: const EdgeInsets.all(16.0),
                       textStyle: const TextStyle(fontSize: 20),
                     ),

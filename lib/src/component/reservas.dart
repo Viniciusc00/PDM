@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-Widget reservas(BuildContext context) {
+Widget reservas(BuildContext context, String email) {
   return Column(
     mainAxisSize: MainAxisSize.max,
     crossAxisAlignment: CrossAxisAlignment.start,
@@ -24,7 +24,7 @@ Widget reservas(BuildContext context) {
         child: StreamBuilder<QuerySnapshot>(
           stream: FirebaseFirestore.instance
               .collection('reserva')
-              .where('cliente_email', isEqualTo: 'teste')
+              .where('cliente_email', isEqualTo: email)
               .snapshots(),
           builder: (context, snapshot) {
             if (snapshot.hasError) {

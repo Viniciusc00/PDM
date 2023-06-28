@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
-
-import '../../../../component/lista_restaurante.dart';
 import '../../../home/view/widget/historico_reserva.dart';
 
-Widget itemUsuario(BuildContext context) {
-  int cor = int.parse(restauranteCorSelecionado!);
+Widget itemUsuario(BuildContext context, String email, String nomeRestaurante,
+    int corRestaurante) {
   return Column(
     children: [
       Container(
         width: MediaQuery.of(context).size.width,
         height: 120,
         decoration: BoxDecoration(
-          color: Color(cor),
+          color: Color(corRestaurante),
         ),
         child: Padding(
           padding: const EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
@@ -120,8 +118,11 @@ Widget itemUsuario(BuildContext context) {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) =>
-                                  const UserCarrinho() /*colocar o restaurante*/),
+                              builder: (context) => UserCarrinho(
+                                  email: email,
+                                  nomeRestaurante: nomeRestaurante,
+                                  corRestaurante:
+                                      corRestaurante) /*colocar o restaurante*/),
                         );
                       },
                       style: TextButton.styleFrom(
@@ -178,8 +179,11 @@ Widget itemUsuario(BuildContext context) {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) =>
-                                  const UserCarrinho() /*colocar o restaurante*/),
+                              builder: (context) => UserCarrinho(
+                                  email: email,
+                                  nomeRestaurante: nomeRestaurante,
+                                  corRestaurante:
+                                      corRestaurante) /*colocar o restaurante*/),
                         );
                       },
                       style: TextButton.styleFrom(
@@ -199,7 +203,7 @@ Widget itemUsuario(BuildContext context) {
             onPressed: () {},
             style: TextButton.styleFrom(
               foregroundColor: Colors.white,
-              backgroundColor: Color(cor),
+              backgroundColor: Color(corRestaurante),
               padding: const EdgeInsets.all(16.0),
               textStyle: const TextStyle(fontSize: 20),
             ),

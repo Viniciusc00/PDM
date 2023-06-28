@@ -6,22 +6,26 @@ import 'package:counter_button/counter_button.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import '../../../../component/lista_restaurante.dart';
-
 class DetalheProduto extends StatefulWidget {
-  const DetalheProduto({super.key});
+  final String email;
+  final String nomeRestaurante;
+  final int corRestaurante;
+  DetalheProduto(
+      {super.key,
+      required this.email,
+      required this.nomeRestaurante,
+      required this.corRestaurante});
 
   @override
   State<DetalheProduto> createState() => _DetalheProdutoState();
 }
 
 class _DetalheProdutoState extends State<DetalheProduto> {
-  int cor = int.parse(restauranteCorSelecionado!);
-
   Future addCarrinho() async {
     final docCliente = FirebaseFirestore.instance
         .collection('reserva')
-        .doc('Panama|teste|2023-06-26 18:00:00.000Z')
+        .doc([widget.nomeRestaurante, widget.email, '2023-06-26 18:00:00.000Z']
+            .join('|'))
         .collection('carrinho')
         .doc(pratoNomeSelecionado);
     var json = {
@@ -130,9 +134,9 @@ class _DetalheProdutoState extends State<DetalheProduto> {
                             });
                           },
                           count: _counterValue,
-                          countColor: Color(cor),
-                          buttonColor: Color(cor),
-                          progressColor: Color(cor),
+                          countColor: Color(widget.corRestaurante),
+                          buttonColor: Color(widget.corRestaurante),
+                          progressColor: Color(widget.corRestaurante),
                         ),
                         const Padding(
                           padding: EdgeInsets.symmetric(vertical: 15),
@@ -146,11 +150,15 @@ class _DetalheProdutoState extends State<DetalheProduto> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const HomePage()));
+                                    builder: (context) => HomePage(
+                                        email: widget.email,
+                                        nomeRestaurante: widget.nomeRestaurante,
+                                        corRestaurante:
+                                            widget.corRestaurante)));
                           },
                           style: TextButton.styleFrom(
                             foregroundColor: Colors.white,
-                            backgroundColor: Color(cor),
+                            backgroundColor: Color(widget.corRestaurante),
                             padding: const EdgeInsets.all(16.0),
                             textStyle: const TextStyle(fontSize: 20),
                           ),

@@ -5,7 +5,14 @@ import '../widget/account.dart';
 import '../widget/home.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  final String email;
+  final String nomeRestaurante;
+  final int corRestaurante;
+  HomePage(
+      {super.key,
+      required this.email,
+      required this.nomeRestaurante,
+      required this.corRestaurante});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -14,10 +21,19 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
 
-  static final List<Widget> _pages = [
-    UserHome(),
-    ItemCarrinho(),
-    const UserAccount(),
+  late final List<Widget> _pages = [
+    UserHome(
+        email: widget.email,
+        nomeRestaurante: widget.nomeRestaurante,
+        corRestaurante: widget.corRestaurante),
+    ItemCarrinho(
+        email: widget.email,
+        nomeRestaurante: widget.nomeRestaurante,
+        corRestaurante: widget.corRestaurante),
+    UserAccount(
+        email: widget.email,
+        nomeRestaurante: widget.nomeRestaurante,
+        corRestaurante: widget.corRestaurante),
   ];
 
   void _navigateBottomNavBar(int index) {

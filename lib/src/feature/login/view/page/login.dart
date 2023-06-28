@@ -77,8 +77,11 @@ class _LoginPageState extends State<LoginPage> {
 
         prefs.setString('token', myToken);
         // ignore: use_build_context_synchronously
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const UserRestaurante()));
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) =>
+                    UserRestaurante(email: emailController.text)));
       } else {
         if (kDebugMode) {
           print("Algo esta errado");
@@ -96,7 +99,6 @@ class _LoginPageState extends State<LoginPage> {
   void initSharedPref() async {
     prefs = await SharedPreferences.getInstance();
   }
-
 
   @override
   Widget build(BuildContext context) {

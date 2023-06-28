@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
-
-import '../../../../component/lista_restaurante.dart';
 import '../widget/historico_reserva.dart';
 
 class ConfirmaReserva extends StatefulWidget {
-  const ConfirmaReserva({super.key});
+  final String email;
+  final String nomeRestaurante;
+  final int corRestaurante;
+  ConfirmaReserva(
+      {super.key,
+      required this.email,
+      required this.nomeRestaurante,
+      required this.corRestaurante});
 
   @override
   State<ConfirmaReserva> createState() => _ConfirmaReservaState();
 }
 
 class _ConfirmaReservaState extends State<ConfirmaReserva> {
-  int cor = int.parse(restauranteCorSelecionado!);
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -58,13 +62,16 @@ class _ConfirmaReservaState extends State<ConfirmaReserva> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>
-                                const UserCarrinho() /*colocar o restaurante*/),
+                            builder: (context) => UserCarrinho(
+                                email: widget.email,
+                                nomeRestaurante: widget.nomeRestaurante,
+                                corRestaurante: widget
+                                    .corRestaurante) /*colocar o restaurante*/),
                       );
                     },
                     style: TextButton.styleFrom(
                       foregroundColor: Colors.white,
-                      backgroundColor: Color(cor),
+                      backgroundColor: Color(widget.corRestaurante),
                       padding: const EdgeInsets.all(16.0),
                       textStyle: const TextStyle(fontSize: 20),
                     ),
