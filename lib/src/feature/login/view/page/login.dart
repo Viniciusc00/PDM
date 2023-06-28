@@ -96,24 +96,7 @@ class _LoginPageState extends State<LoginPage> {
   void initSharedPref() async {
     prefs = await SharedPreferences.getInstance();
   }
-/*
-  AuthService authService = AuthService();
-  
-  @override
-  void initState() {
-    super.initState();
-    initSharedPref();
-  }
 
-  void initSharedPref() async {
-    prefs = await SharedPreferences.getInstance();
-  }
-
-  void loginUser() async {
-    if (emailController.text.isNotEmpty && passwordController.text.isNotEmpty) {
-      authService.logarUsuario(email: emailController.text, senha: passwordController.text);
-    }
-  }*/
 
   @override
   Widget build(BuildContext context) {

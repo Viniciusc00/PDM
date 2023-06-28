@@ -1,9 +1,31 @@
+// ignore_for_file: prefer_const_constructors
+
+import 'package:app_comida/src/component/prato_item.dart';
+import 'package:app_comida/src/feature/home/view/page/pagamento.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import '../feature/home/view/page/pagamento.dart';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
+
+int somadorio = 0;
+
+int calcular(int valor) {
+  int total = 0;
+
+  total = total + valor;
+
+  return total;
+}
+
+Future deleteCarrinho(final nome) async {
+  final docCliente = FirebaseFirestore.instance
+      .collection('cliente')
+      .doc('teste')
+      .collection('carrinho')
+      .doc(nome);
+
+  await docCliente.delete();
+}
 
 Widget itemCarrinho(BuildContext context) {
   return StreamBuilder<QuerySnapshot>(
@@ -33,6 +55,7 @@ Widget itemCarrinho(BuildContext context) {
               final url = document['url'];
               final nome = document['nome'];
               final valor = document['valor'];
+              somadorio = calcular(valor);
 
               return Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(16, 8, 16, 0),
@@ -92,7 +115,7 @@ Widget itemCarrinho(BuildContext context) {
                                   ),
                                 ),
                                 Text(
-                                  NumberFormat('### minutos', 'pt_BR')
+                                  NumberFormat('R\$ ###.00', 'pt_BR')
                                       .format(valor),
                                   style: TextStyle(
                                     fontFamily: 'Plus Jakarta Sans',
@@ -112,7 +135,7 @@ Widget itemCarrinho(BuildContext context) {
                             size: 20,
                           ),
                           onPressed: () {
-                            print('IconButton pressed ...');
+                            deleteCarrinho(nome);
                           },
                         ),
                       ],
@@ -144,7 +167,7 @@ Widget itemCarrinho(BuildContext context) {
                 ],
               ),
             ),
-            const Padding(
+            Padding(
               padding: EdgeInsetsDirectional.fromSTEB(24, 4, 24, 12),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
@@ -153,7 +176,7 @@ Widget itemCarrinho(BuildContext context) {
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(200, 0, 0, 0),
                     child: Text(
-                      '\$137.75',
+                      NumberFormat('R\$ ###.00', 'pt_BR').format(somadorio),
                       style: TextStyle(
                         fontFamily: 'Outfit',
                         color: Color(0xFF0F1113),
@@ -167,7 +190,12 @@ Widget itemCarrinho(BuildContext context) {
             ),
             Center(
               child: TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const PagamentoPage()));
+                },
                 style: TextButton.styleFrom(
                   foregroundColor: Colors.white,
                   backgroundColor: Colors.red,
@@ -178,8 +206,8 @@ Widget itemCarrinho(BuildContext context) {
               ),
             ),
             Padding(
-                      padding: EdgeInsets.symmetric(vertical: 14),
-                    ),
+              padding: EdgeInsets.symmetric(vertical: 14),
+            ),
           ],
         ),
       );
