@@ -58,7 +58,7 @@ class _ConfirmaReservaState extends State<ConfirmaReserva> {
                         context,
                         MaterialPageRoute(
                             builder: (context) =>
-                                const UserCarrinho()/*colocar o restaurante*/),
+                                const UserCarrinho() /*colocar o restaurante*/),
                       );
                     },
                     style: TextButton.styleFrom(

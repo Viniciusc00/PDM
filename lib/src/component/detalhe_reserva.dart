@@ -1,4 +1,6 @@
+import 'package:app_comida/src/component/lista_restaurante.dart';
 import 'package:app_comida/src/feature/home/view/page/homepage.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:counter_button/counter_button.dart';
 import 'package:flutter/material.dart';
 
@@ -14,7 +16,47 @@ class detalheReserva extends StatefulWidget {
 
 // ignore: camel_case_types
 class _detalheReservaState extends State<detalheReserva> {
-  int _counterValue = 0;
+  TextEditingController _observacaoController = TextEditingController();
+  int _counterValue = 1;
+  int _mesasDisponiveis = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    fetchMesasDisponiveis();
+  }
+
+  Future<void> fetchMesasDisponiveis() async {
+    try {
+      final snapshot = await FirebaseFirestore.instance
+          .collection('restaurante')
+          .doc(restauranteSelecionado)
+          .get();
+
+      final data = snapshot.data();
+      final reservaSnapshot = await FirebaseFirestore.instance
+          .collection('reserva')
+          .where('cliente_email', isEqualTo: 'teste')
+          .where('restaurante_nome', isEqualTo: restauranteSelecionado)
+          .get();
+
+      int sum = 0;
+      for (final doc in reservaSnapshot.docs) {
+        final data = doc.data();
+        final qtdMesas = data['qtd_mesas'] as int?;
+        if (qtdMesas != null) {
+          sum += qtdMesas;
+        }
+      }
+      setState(() {
+        _mesasDisponiveis = (data?['capacidade'] as int?) ?? 0;
+        _mesasDisponiveis = _mesasDisponiveis - sum;
+      });
+    } catch (error) {
+      print('Error retrieving capacidade: $error');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,15 +71,18 @@ class _detalheReservaState extends State<detalheReserva> {
           ),
           onPressed: () {
             Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const UserRestaurante()));
+              context,
+              MaterialPageRoute(builder: (context) => const UserRestaurante()),
+            );
           },
         ),
         title: const Text(
           'Reserva',
           style: TextStyle(
-              fontFamily: 'Outfit', color: Colors.white, fontSize: 16),
+            fontFamily: 'Outfit',
+            color: Colors.white,
+            fontSize: 16,
+          ),
         ),
         actions: const [],
         centerTitle: false,
@@ -67,13 +112,14 @@ class _detalheReservaState extends State<detalheReserva> {
                           )
                         ],
                       ),
-                      child: const Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 16),
+                      child: Padding(
+                        padding:
+                            const EdgeInsetsDirectional.fromSTEB(16, 0, 16, 16),
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
+                            const Text(
                               'Mesas disponíveis:',
                               style: TextStyle(
                                 fontFamily: 'Outfit',
@@ -84,11 +130,10 @@ class _detalheReservaState extends State<detalheReserva> {
                             Align(
                               alignment: AlignmentDirectional(0, -0.5),
                               child: Padding(
-                                padding:
-                                    EdgeInsetsDirectional.fromSTEB(0, 8, 0, 0),
+                                padding: const EdgeInsets.only(top: 8),
                                 child: Text(
-                                  '10',
-                                  style: TextStyle(
+                                  _mesasDisponiveis.toString(),
+                                  style: const TextStyle(
                                     fontFamily: 'Outfit',
                                     color: Colors.white,
                                     fontSize: 36,
@@ -139,6 +184,7 @@ class _detalheReservaState extends State<detalheReserva> {
                       child: SizedBox(
                         width: 250,
                         child: TextFormField(
+                          controller: _observacaoController,
                           autofocus: true,
                           obscureText: false,
                           decoration: InputDecoration(
@@ -213,7 +259,13 @@ class _detalheReservaState extends State<detalheReserva> {
                         loading: false,
                         onChange: (int val) {
                           setState(() {
-                            _counterValue = val;
+                            // Enforce the minimum value of 1
+                            _counterValue = val < 1 ? 1 : val;
+
+                            // Enforce the maximum value of _mesasDisponiveis
+                            if (_counterValue > _mesasDisponiveis) {
+                              _counterValue = _mesasDisponiveis;
+                            }
                           });
                         },
                         count: _counterValue,
@@ -230,12 +282,32 @@ class _detalheReservaState extends State<detalheReserva> {
                     ),
                   ),
                   TextButton(
-                    onPressed: () {
+                    onPressed: () async {
+                      final selectedTimestamp =
+                          DateTime.parse('2023-06-26 18:00:00').toUtc();
+
+                      final reservationData = {
+                        'restaurante_nome': restauranteSelecionado,
+                        'cliente_email': 'teste',
+                        'qtd_mesas': _counterValue,
+                        'data_e_horario': selectedTimestamp,
+                        'observacao': _observacaoController.text,
+                      };
+
+                      try {
+                        await FirebaseFirestore.instance
+                            .collection('reserva')
+                            .add(reservationData);
+                        print('Reservation created successfully.');
+                      } catch (error) {
+                        print('Error creating reservation: $error');
+                      }
+
+                      // Navigate to the desired page
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>
-                                const HomePage() /*colocar o restaurante*/),
+                            builder: (context) => const HomePage()),
                       );
                     },
                     style: TextButton.styleFrom(

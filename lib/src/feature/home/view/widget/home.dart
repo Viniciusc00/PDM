@@ -1,6 +1,5 @@
 import 'package:app_comida/src/component/lista_restaurante.dart';
 import 'package:flutter/material.dart';
-import 'package:app_comida/assets/repository/pratos_repository.dart';
 import 'package:app_comida/src/component/prato_item.dart';
 
 class UserHome extends StatefulWidget {
@@ -12,8 +11,6 @@ class UserHome extends StatefulWidget {
 
 class _UserHomeState extends State<UserHome> {
   int cor = int.parse(restauranteCorSelecionado!);
-
-  final pratos = PratosRepository.prato;
 
   PreferredSizeWidget _minhaBarra(String texto) {
     return AppBar(
