@@ -1,3 +1,4 @@
+import 'package:app_comida/src/component/cart.dart';
 import 'package:app_comida/src/feature/home/view/page/cart_page.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +17,7 @@ class _HomePageState extends State<HomePage> {
 
   static final List<Widget> _pages = [
     UserHome(),
-    const CartPage(),
+    ItemCarrinho(),
     const UserAccount(),
   ];
 

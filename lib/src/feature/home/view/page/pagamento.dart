@@ -1,6 +1,7 @@
 
 // ignore_for_file: prefer_const_constructors
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
@@ -26,6 +27,24 @@ PreferredSizeWidget _minhaBarra(String texto) {
   }
 
 class _PagamentoPageState extends State<PagamentoPage> {
+
+  /*
+  Future addValorDoPagamento() async {
+    final docCliente = FirebaseFirestore.instance
+        .collection('reserva')
+        .doc('Panama|teste|2023-06-26 18:00:00.000Z')
+        .collection('carrinho')
+        .doc(pratoNomeSelecionado);
+    var json = {
+      "nome": pratoNomeSelecionado,
+      "valor": pratoValorSelecionado,
+      "url": pratoImagemSelecionado
+    };
+
+    await docCliente.set(json);
+
+  }
+  */
   @override
   Widget build(BuildContext context) {
      return Scaffold(

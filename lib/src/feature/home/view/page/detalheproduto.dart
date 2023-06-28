@@ -1,5 +1,4 @@
 import 'dart:ui';
-
 import 'package:app_comida/src/component/prato_item.dart';
 import 'package:app_comida/src/feature/home/view/page/homepage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -18,14 +17,15 @@ class _DetalheProdutoState extends State<DetalheProduto> {
 
   Future addCarrinho() async {
     final docCliente = FirebaseFirestore.instance
-        .collection('cliente')
-        .doc('teste')
+        .collection('reserva')
+        .doc('Panama|teste|2023-06-26 18:00:00.000Z')
         .collection('carrinho')
         .doc(pratoNomeSelecionado);
     var json = {
       "nome": pratoNomeSelecionado,
       "valor": pratoValorSelecionado,
-      "url": pratoImagemSelecionado
+      "url": pratoImagemSelecionado, 
+      "quantidade": _counterValue
     };
 
     await docCliente.set(json);
@@ -124,7 +124,7 @@ class _DetalheProdutoState extends State<DetalheProduto> {
                           loading: false,
                           onChange: (int val) {
                             setState(() {
-                              _counterValue = val;
+                              _counterValue = val < 1 ? 1 : val;
                             });
                           },
                           count: _counterValue,
@@ -142,7 +142,6 @@ class _DetalheProdutoState extends State<DetalheProduto> {
                           onPressed: () {
 
                             addCarrinho();
-                            
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
