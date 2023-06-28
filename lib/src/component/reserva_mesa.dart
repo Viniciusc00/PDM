@@ -2,6 +2,8 @@ import 'package:app_comida/src/component/detalhe_reserva.dart';
 import 'package:flutter/material.dart';
 
 Widget reservaMesa(BuildContext context, int mesasDisponiveis) {
+  final isDisponivel = mesasDisponiveis > 0;
+
   return Column(
     children: [
       ListTile(
@@ -21,15 +23,19 @@ Widget reservaMesa(BuildContext context, int mesasDisponiveis) {
             ],
           ),
         ),
-        leading:
-            Icon(Icons.check_circle, color: Color.fromARGB(255, 43, 255, 0)),
+        leading: Icon(
+          isDisponivel ? Icons.check_circle : Icons.close,
+          color: isDisponivel ? Color.fromARGB(255, 43, 255, 0) : Colors.grey,
+        ),
         contentPadding: const EdgeInsets.all(15),
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => detalheReserva()),
-          );
-        },
+        onTap: isDisponivel
+            ? () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => detalheReserva()),
+                );
+              }
+            : null,
       ),
       const Divider(),
     ],
