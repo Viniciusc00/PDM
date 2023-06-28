@@ -149,10 +149,8 @@ class _ItemCarrinhoState extends State<ItemCarrinho> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Hero(
-                                    tag: 'ControllerImage',
-                                    transitionOnUserGestures: true,
-                                    child: ClipRRect(
+                                 
+                                    ClipRRect(
                                       borderRadius: BorderRadius.circular(12),
                                       child: Image.network(
                                         url,
@@ -161,7 +159,7 @@ class _ItemCarrinhoState extends State<ItemCarrinho> {
                                         fit: BoxFit.fitWidth,
                                       ),
                                     ),
-                                  ),
+                                  
                                   Expanded(
                                     child: Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(

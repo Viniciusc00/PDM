@@ -33,7 +33,7 @@ class _UserCarrinhoState extends State<UserCarrinho> {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              reservas(context, widget.email),
+              reservas(context, widget.email,widget.corRestaurante,widget.nomeRestaurante),
             ],
           ),
         ));

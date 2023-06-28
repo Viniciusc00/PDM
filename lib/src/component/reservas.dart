@@ -2,7 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-Widget reservas(BuildContext context, String email) {
+import '../feature/home/view/page/homepage.dart';
+
+Widget reservas(BuildContext context, String email, int corRestaurante,
+    String nomeRestaurante) {
   return Column(
     mainAxisSize: MainAxisSize.max,
     crossAxisAlignment: CrossAxisAlignment.start,
@@ -169,6 +172,29 @@ Widget reservas(BuildContext context, String email) {
         thickness: 1,
         color: Color(0xFFE5E7EB),
       ),
+      Padding(
+        padding: EdgeInsets.symmetric(vertical: 10),
+      ),
+      Center(
+        child: TextButton(
+          onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => HomePage(
+                        email: email,
+                        nomeRestaurante: nomeRestaurante,
+                        corRestaurante: corRestaurante)));
+          },
+          style: TextButton.styleFrom(
+            foregroundColor: Colors.white,
+            backgroundColor: Color(corRestaurante),
+            padding: const EdgeInsets.all(16.0),
+            textStyle: const TextStyle(fontSize: 20),
+          ),
+          child: const Text('Adicionar ao Carrinho'),
+        ),
+      )
     ],
   );
 }

@@ -31,23 +31,7 @@ PreferredSizeWidget _minhaBarra(String texto, int corRestaurante) {
 }
 
 class _PagamentoPageState extends State<PagamentoPage> {
-  /*
-  Future addValorDoPagamento() async {
-    final docCliente = FirebaseFirestore.instance
-        .collection('reserva')
-        .doc('Panama|teste|2023-06-26 18:00:00.000Z')
-        .collection('carrinho')
-        .doc(pratoNomeSelecionado);
-    var json = {
-      "nome": pratoNomeSelecionado,
-      "valor": pratoValorSelecionado,
-      "url": pratoImagemSelecionado
-    };
-
-    await docCliente.set(json);
-
-  }
-  */
+ 
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -38,7 +38,7 @@ class _DetalheProdutoState extends State<DetalheProduto> {
     await docCliente.set(json);
   }
 
-  int _counterValue = 0;
+  int _counterValue = 1;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
