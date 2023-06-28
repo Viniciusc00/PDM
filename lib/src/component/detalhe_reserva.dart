@@ -57,6 +57,14 @@ class _detalheReservaState extends State<detalheReserva> {
     }
   }
 
+  Future<void> refreshData() async {
+    setState(() {
+      _counterValue = 1;
+      _observacaoController.clear();
+    });
+    await fetchMesasDisponiveis();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -84,7 +92,15 @@ class _detalheReservaState extends State<detalheReserva> {
             fontSize: 16,
           ),
         ),
-        actions: const [],
+        actions: [
+          IconButton(
+            icon: const Icon(
+              Icons.refresh,
+              color: Colors.white,
+            ),
+            onPressed: refreshData,
+          ),
+        ],
         centerTitle: false,
         elevation: 0,
       ),
@@ -94,231 +110,227 @@ class _detalheReservaState extends State<detalheReserva> {
           alignment: const AlignmentDirectional(0, -1),
           child: SingleChildScrollView(
             child: Column(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Align(
-                    alignment: const AlignmentDirectional(0, -1),
-                    child: Container(
-                      width: double.infinity,
-                      height: 100,
-                      decoration: const BoxDecoration(
-                        color: Colors.red,
-                        boxShadow: [
-                          BoxShadow(
-                            blurRadius: 4,
-                            color: Color(0x230F1113),
-                            offset: Offset(0, 2),
-                          )
-                        ],
-                      ),
-                      child: Padding(
-                        padding:
-                            const EdgeInsetsDirectional.fromSTEB(16, 0, 16, 16),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.max,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
-                              'Mesas disponíveis:',
-                              style: TextStyle(
-                                fontFamily: 'Outfit',
-                                color: Colors.white,
-                                fontSize: 20,
-                              ),
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Align(
+                  alignment: const AlignmentDirectional(0, -1),
+                  child: Container(
+                    width: double.infinity,
+                    height: 100,
+                    decoration: const BoxDecoration(
+                      color: Colors.red,
+                      boxShadow: [
+                        BoxShadow(
+                          blurRadius: 4,
+                          color: Color(0x230F1113),
+                          offset: Offset(0, 2),
+                        )
+                      ],
+                    ),
+                    child: Padding(
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(16, 0, 16, 16),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            'Mesas disponíveis:',
+                            style: TextStyle(
+                              fontFamily: 'Outfit',
+                              color: Colors.white,
+                              fontSize: 20,
                             ),
-                            Align(
-                              alignment: AlignmentDirectional(0, -0.5),
-                              child: Padding(
-                                padding: const EdgeInsets.only(top: 8),
-                                child: Text(
-                                  _mesasDisponiveis.toString(),
-                                  style: const TextStyle(
-                                    fontFamily: 'Outfit',
-                                    color: Colors.white,
-                                    fontSize: 36,
-                                  ),
+                          ),
+                          Align(
+                            alignment: AlignmentDirectional(0, -0.5),
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 8),
+                              child: Text(
+                                _mesasDisponiveis.toString(),
+                                style: const TextStyle(
+                                  fontFamily: 'Outfit',
+                                  color: Colors.white,
+                                  fontSize: 36,
                                 ),
                               ),
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
-                  const Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(20, 15, 20, 0),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Expanded(
-                          child: Text(
-                            'Faça sua reserva',
-                            style: TextStyle(
-                                color: Color(0xff1d2429), fontSize: 28),
-                          ),
+                ),
+                const Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(20, 15, 20, 0),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Expanded(
+                        child: Text(
+                          'Faça sua reserva',
+                          style:
+                              TextStyle(color: Color(0xff1d2429), fontSize: 28),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                  const Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(20, 16, 20, 0),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Expanded(
-                          child: Text(
-                            'Em caso de alguma observação, escreva no campo abaixo',
-                            style: TextStyle(
-                                color: Color(0xff1d2429), fontSize: 12),
-                          ),
+                ),
+                const Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(20, 16, 20, 0),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Expanded(
+                        child: Text(
+                          'Em caso de alguma observação, escreva no campo abaixo',
+                          style:
+                              TextStyle(color: Color(0xff1d2429), fontSize: 12),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                  Align(
-                    alignment: const AlignmentDirectional(-0.7, 0),
-                    child: Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(8, 15, 8, 0),
-                      child: SizedBox(
-                        width: 250,
-                        child: TextFormField(
-                          controller: _observacaoController,
-                          autofocus: true,
-                          obscureText: false,
-                          decoration: InputDecoration(
-                            labelText: 'Observação',
-                            labelStyle: const TextStyle(
-                                color: Color(0xff1d2429), fontSize: 12),
-                            hintStyle: const TextStyle(
-                                color: Color(0xff1d2429), fontSize: 12),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                color: Color(0xff000000),
-                                width: 0.8,
-                              ),
-                              borderRadius: BorderRadius.circular(8),
+                ),
+                Align(
+                  alignment: const AlignmentDirectional(-0.7, 0),
+                  child: Padding(
+                    padding: const EdgeInsetsDirectional.fromSTEB(8, 15, 8, 0),
+                    child: SizedBox(
+                      width: 250,
+                      child: TextFormField(
+                        controller: _observacaoController,
+                        autofocus: true,
+                        obscureText: false,
+                        decoration: InputDecoration(
+                          labelText: 'Observação',
+                          labelStyle: const TextStyle(
+                              color: Color(0xff1d2429), fontSize: 12),
+                          hintStyle: const TextStyle(
+                              color: Color(0xff1d2429), fontSize: 12),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                              color: Color(0xff000000),
+                              width: 0.8,
                             ),
-                            focusedBorder: UnderlineInputBorder(
-                              borderSide: const BorderSide(
-                                color: Color(0xff22282f),
-                                width: 2,
-                              ),
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            errorBorder: UnderlineInputBorder(
-                              borderSide: const BorderSide(
-                                color: Color(0xffe21c3d),
-                                width: 2,
-                              ),
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            focusedErrorBorder: UnderlineInputBorder(
-                              borderSide: const BorderSide(
-                                color: Color(0xffe21c3d),
-                                width: 2,
-                              ),
-                              borderRadius: BorderRadius.circular(8),
-                            ),
+                            borderRadius: BorderRadius.circular(8),
                           ),
-                          style: const TextStyle(
-                              color: Color(0xff1d2429), fontSize: 14),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: const BorderSide(
+                              color: Color(0xff22282f),
+                              width: 2,
+                            ),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          errorBorder: UnderlineInputBorder(
+                            borderSide: const BorderSide(
+                              color: Color(0xffe21c3d),
+                              width: 2,
+                            ),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          focusedErrorBorder: UnderlineInputBorder(
+                            borderSide: const BorderSide(
+                              color: Color(0xffe21c3d),
+                              width: 2,
+                            ),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          filled: true,
+                          fillColor: Colors.white,
                         ),
+                        style: const TextStyle(
+                            color: Color(0xff1d2429), fontSize: 16),
+                        keyboardType: TextInputType.text,
+                        maxLines: null,
                       ),
                     ),
                   ),
-                  const Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(20, 15, 20, 0),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Expanded(
-                          child: Text(
-                            'Informe a quantidade de mesas:',
-                            style: TextStyle(
-                                color: Color(0xff1d2429), fontSize: 12),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Align(
-                    alignment: const AlignmentDirectional(-0.8, 0),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: const Color(0xffffffff),
-                        borderRadius: BorderRadius.circular(8),
-                        shape: BoxShape.rectangle,
-                        border: Border.all(
-                          color: const Color(0xfff1f4f8),
-                          width: 0.8,
+                ),
+                const Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(20, 16, 20, 0),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Expanded(
+                        child: Text(
+                          'Quantidade de Mesas',
+                          style:
+                              TextStyle(color: Color(0xff1d2429), fontSize: 14),
                         ),
                       ),
-                      child: CounterButton(
-                        loading: false,
-                        onChange: (int val) {
-                          setState(() {
-                            // Enforce the minimum value of 1
-                            _counterValue = val < 1 ? 1 : val;
+                    ],
+                  ),
+                ),
+                Align(
+                  alignment: const AlignmentDirectional(0, 0),
+                  child: Padding(
+                    padding: const EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
+                    child: CounterButton(
+                      loading: false,
+                      onChange: (int val) {
+                        setState(() {
+                          // Enforce the minimum value of 1
+                          _counterValue = val < 1 ? 1 : val;
 
-                            // Enforce the maximum value of _mesasDisponiveis
-                            if (_counterValue > _mesasDisponiveis) {
-                              _counterValue = _mesasDisponiveis;
-                            }
-                          });
-                        },
-                        count: _counterValue,
-                        countColor: Colors.red,
-                        buttonColor: Colors.redAccent,
-                        progressColor: Colors.redAccent,
+                          // Enforce the maximum value of _mesasDisponiveis
+                          if (_counterValue > _mesasDisponiveis) {
+                            _counterValue = _mesasDisponiveis;
+                          }
+                        });
+                      },
+                      count: _counterValue,
+                      countColor: Colors.red,
+                      buttonColor: Colors.redAccent,
+                      progressColor: Colors.redAccent,
+                    ),
+                  ),
+                ),
+                Padding(
+                    padding: const EdgeInsetsDirectional.fromSTEB(0, 40, 0, 16),
+                    child: TextButton(
+                      onPressed: () async {
+                        final selectedTimestamp =
+                            DateTime.parse('2023-06-26 18:00:00').toUtc();
+
+                        final reservationData = {
+                          'restaurante_nome': restauranteSelecionado,
+                          'cliente_email': 'teste',
+                          'qtd_mesas': _counterValue,
+                          'data_e_horario': selectedTimestamp,
+                          'observacao': _observacaoController.text,
+                        };
+
+                        try {
+                          await FirebaseFirestore.instance
+                              .doc([
+                                restauranteSelecionado,
+                                'teste',
+                                selectedTimestamp
+                              ].join('|'))
+                              .set(reservationData);
+                          print('Reservation created successfully.');
+                        } catch (error) {
+                          print('Error creating reservation: $error');
+                        }
+
+                        // Navigate to the desired page
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const HomePage()),
+                        );
+                      },
+                      style: TextButton.styleFrom(
+                        foregroundColor: Colors.white,
+                        backgroundColor: Colors.red,
+                        padding: const EdgeInsets.all(16.0),
+                        textStyle: const TextStyle(fontSize: 20),
                       ),
-                    ),
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 15),
-                    child: Divider(
-                      height: 4,
-                    ),
-                  ),
-                  TextButton(
-                    onPressed: () async {
-                      final selectedTimestamp =
-                          DateTime.parse('2023-06-26 18:00:00').toUtc();
-
-                      final reservationData = {
-                        'restaurante_nome': restauranteSelecionado,
-                        'cliente_email': 'teste',
-                        'qtd_mesas': _counterValue,
-                        'data_e_horario': selectedTimestamp,
-                        'observacao': _observacaoController.text,
-                      };
-
-                      try {
-                        await FirebaseFirestore.instance
-                            .collection('reserva')
-                            .add(reservationData);
-                        print('Reservation created successfully.');
-                      } catch (error) {
-                        print('Error creating reservation: $error');
-                      }
-
-                      // Navigate to the desired page
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const HomePage()),
-                      );
-                    },
-                    style: TextButton.styleFrom(
-                      foregroundColor: Colors.white,
-                      backgroundColor: Colors.red,
-                      padding: const EdgeInsets.all(16.0),
-                      textStyle: const TextStyle(fontSize: 20),
-                    ),
-                    child: const Text('Confirmar a reserva'),
-                  )
-                ]),
+                      child: const Text('Confirmar a reserva'),
+                    )),
+              ],
+            ),
           ),
         ),
       ),
