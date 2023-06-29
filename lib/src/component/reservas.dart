@@ -37,7 +37,7 @@ Widget reservas(BuildContext context, String email, int corRestaurante,
             if (snapshot.connectionState == ConnectionState.waiting) {
               return CircularProgressIndicator();
             }
-
+            
             final reservas = snapshot.data?.docs ?? [];
 
             return Column(
@@ -45,6 +45,7 @@ Widget reservas(BuildContext context, String email, int corRestaurante,
               children: reservas.map((reserva) {
                 final data = reserva.data() as Map<String, dynamic>;
                 final qtdMesas = data['qtd_mesas'] as int?;
+                final valorTotal = data['valorTotal'];
                 final restauranteNome = data['restaurante_nome'] as String?;
                 final dataEHora =
                     (data['data_e_horario'] as Timestamp?)?.toDate();
@@ -52,6 +53,7 @@ Widget reservas(BuildContext context, String email, int corRestaurante,
                     ? DateFormat('dd/MM/yyyy HH:mm').format(dataEHora)
                     : '';
 
+               
                 return Padding(
                   padding: const EdgeInsetsDirectional.fromSTEB(0, 1, 0, 0),
                   child: Material(
@@ -120,7 +122,7 @@ Widget reservas(BuildContext context, String email, int corRestaurante,
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           0, 4, 0, 0),
                                       child: Text(
-                                        'R\$ 257,98 ${qtdMesas ?? 0} Mesa(s)',
+                                        'R\$ $valorTotal.00 ${qtdMesas ?? 0} Mesa(s)',
                                         textAlign: TextAlign.start,
                                         style: TextStyle(
                                           fontFamily: 'Outfit',

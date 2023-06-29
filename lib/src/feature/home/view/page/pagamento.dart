@@ -10,9 +10,11 @@ class PagamentoPage extends StatefulWidget {
   final String email;
   final String nomeRestaurante;
   final int corRestaurante;
+  final int valorTotal;
   PagamentoPage(
       {super.key,
       required this.email,
+      required this.valorTotal,
       required this.nomeRestaurante,
       required this.corRestaurante});
 
@@ -31,6 +33,14 @@ PreferredSizeWidget _minhaBarra(String texto, int corRestaurante) {
 }
 
 class _PagamentoPageState extends State<PagamentoPage> {
+  void addValorTotal() async {
+    
+      FirebaseFirestore.instance
+        .collection('reserva')
+        .doc([widget.nomeRestaurante, widget.email, '2023-06-26 18:00:00.000Z']
+            .join('|')).update({"valorTotal": widget.valorTotal});
+    
+        }
  
   @override
   Widget build(BuildContext context) {
@@ -349,6 +359,7 @@ class _PagamentoPageState extends State<PagamentoPage> {
                     Center(
                       child: TextButton(
                         onPressed: () {
+                          addValorTotal();
                           Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -378,3 +389,6 @@ class _PagamentoPageState extends State<PagamentoPage> {
     );
   }
 }
+
+ 
+        

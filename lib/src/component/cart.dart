@@ -291,6 +291,7 @@ class _ItemCarrinhoState extends State<ItemCarrinho> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) => PagamentoPage(
+                                    valorTotal : somatorio,
                                     email: widget.email,
                                     nomeRestaurante: widget.nomeRestaurante,
                                     corRestaurante: widget.corRestaurante),
