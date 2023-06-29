@@ -1,12 +1,18 @@
+import 'package:app_comida/src/component/cart.dart';
 import 'package:flutter/material.dart';
 
 import '../widget/account.dart';
 import '../widget/home.dart';
-import '../widget/cart.dart';
-
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  final String email;
+  final String nomeRestaurante;
+  final int corRestaurante;
+  HomePage(
+      {super.key,
+      required this.email,
+      required this.nomeRestaurante,
+      required this.corRestaurante});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -15,10 +21,19 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
 
-  static  final List<Widget> _pages = [
-    UserHome(),
-    UserCarrinho(),
-    UserAccount(),
+  late final List<Widget> _pages = [
+    UserHome(
+        email: widget.email,
+        nomeRestaurante: widget.nomeRestaurante,
+        corRestaurante: widget.corRestaurante),
+    ItemCarrinho(
+        email: widget.email,
+        nomeRestaurante: widget.nomeRestaurante,
+        corRestaurante: widget.corRestaurante),
+    UserAccount(
+        email: widget.email,
+        nomeRestaurante: widget.nomeRestaurante,
+        corRestaurante: widget.corRestaurante),
   ];
 
   void _navigateBottomNavBar(int index) {
@@ -30,7 +45,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue,
+      backgroundColor: Colors.white,
       body: _pages[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
@@ -40,8 +55,10 @@ class _HomePageState extends State<HomePage> {
         onTap: _navigateBottomNavBar,
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.shopping_cart), label: 'Carrinho'),
-          BottomNavigationBarItem(icon: Icon(Icons.account_circle_outlined), label: 'Account'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.shopping_cart), label: 'Carrinho'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.account_circle_outlined), label: 'Account'),
         ],
         selectedItemColor: Colors.red,
       ),

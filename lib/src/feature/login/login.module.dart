@@ -1,6 +1,6 @@
-import 'package:appComida/src/feature/login/view/page/login.dart';
+import 'package:app_comida/src/feature/login/view/page/login.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:appComida/src/feature/login/viewmodel/login_viewmodel.dart';
+import 'package:app_comida/src/feature/login/viewmodel/login_viewmodel.dart';
 
 class LoginModule extends Module {
   @override

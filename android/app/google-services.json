@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "947849806236",
+    "project_id": "projetopdm-9ce97",
+    "storage_bucket": "projetopdm-9ce97.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:947849806236:android:6f8d88c77e7e8c24470859",
+        "android_client_info": {
+          "package_name": "com.example.appComida"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "947849806236-l56ae17muquqspq7ru4r9a34621hdmg6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAxpzbmdkPPmqr2W6pCntDoIJ4q-Ckw9yI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "947849806236-l56ae17muquqspq7ru4r9a34621hdmg6.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "947849806236-k541psl0ql4jfnsulg66eddo2nanufjk.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.appComida"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

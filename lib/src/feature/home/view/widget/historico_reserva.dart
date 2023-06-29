@@ -1,40 +1,39 @@
+import 'package:app_comida/src/component/reservas.dart';
 import 'package:flutter/material.dart';
-import '../../../login/view/page/usuario.dart';
 
-class UserAccount extends StatefulWidget {
+class UserCarrinho extends StatefulWidget {
   final String email;
   final String nomeRestaurante;
   final int corRestaurante;
-  UserAccount(
+  UserCarrinho(
       {super.key,
       required this.email,
       required this.nomeRestaurante,
       required this.corRestaurante});
 
   @override
-  State<UserAccount> createState() => _UserAccountState();
+  State<UserCarrinho> createState() => _UserCarrinhoState();
 }
 
 PreferredSizeWidget _minhaBarra(String texto, int corRestaurante) {
   return AppBar(
     title: Text(texto,
         style: const TextStyle(
-            color: Colors.white, fontFamily: 'PermanentMarker', fontSize: 37)),
+            color: Colors.white, fontFamily: 'Outfit', fontSize: 20)),
     backgroundColor: Color(corRestaurante),
     elevation: 0,
   );
 }
 
-class _UserAccountState extends State<UserAccount> {
+class _UserCarrinhoState extends State<UserCarrinho> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: _minhaBarra("Laricão", widget.corRestaurante),
+        appBar: _minhaBarra("Minhas reservas", widget.corRestaurante),
         body: SingleChildScrollView(
           child: Column(
             children: [
-              itemUsuario(context, widget.email, widget.nomeRestaurante,
-                  widget.corRestaurante),
+              reservas(context, widget.email,widget.corRestaurante,widget.nomeRestaurante),
             ],
           ),
         ));

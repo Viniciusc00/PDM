@@ -1,38 +1,42 @@
 import 'package:flutter/material.dart';
-import 'package:appComida/assets/repository/pratos_repository.dart';
-import 'package:appComida/src/component/pratoItem.dart';
+import 'package:app_comida/src/component/prato_item.dart';
 
+class UserHome extends StatefulWidget {
+  final String email;
+  final String nomeRestaurante;
+  final int corRestaurante;
+  UserHome(
+      {super.key,
+      required this.email,
+      required this.nomeRestaurante,
+      required this.corRestaurante});
 
-class UserHome extends StatelessWidget {
-  UserHome({super.key});
+  @override
+  State<UserHome> createState() => _UserHomeState();
+}
 
-  final pratos = PratosRepository.prato;
-
+class _UserHomeState extends State<UserHome> {
   PreferredSizeWidget _minhaBarra(String texto) {
     return AppBar(
-        title: Text(texto,
-            style: const TextStyle(
-                color: Colors.white,
-                fontFamily: 'PermanentMarker',
-                fontSize: 37)),
-        backgroundColor: Colors.red,
-        elevation: 0,
-        actions: <Widget>[
-          IconButton(
-            icon: const Icon(Icons.search),
-            onPressed: () {},
-          ),
-        ]);
+      title: Text(texto,
+          style: const TextStyle(
+              color: Colors.white,
+              fontFamily: 'PermanentMarker',
+              fontSize: 37)),
+      backgroundColor: Color(widget.corRestaurante),
+      elevation: 0,
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: _minhaBarra("Laricão"),
+        appBar: _minhaBarra(widget.nomeRestaurante),
         body: SingleChildScrollView(
           child: Column(
             children: [
-              gerarListaComidas(pratos),
+              pratosItem(context, widget.email, widget.nomeRestaurante,
+                  widget.corRestaurante),
             ],
           ),
         ));

@@ -1,12 +1,10 @@
-import 'package:appComida/assets/repository/onboarding_repository.dart';
-import 'package:appComida/src/feature/home/view/page/homepage.dart';
-import 'package:appComida/src/feature/login/view/page/login.dart';
-import 'package:appComida/src/feature/onboarding/view/page/app_style.dart';
-import 'package:appComida/src/feature/onboarding/view/page/size_configs.dart';
-import 'package:appComida/src/main.dart';
+import 'package:app_comida/assets/repository/onboarding_repository.dart';
+import 'package:app_comida/src/feature/login/view/page/login.dart';
+import 'package:app_comida/src/feature/onboarding/view/page/app_style.dart';
+import 'package:app_comida/src/feature/onboarding/view/page/size_configs.dart';
+import 'package:app_comida/src/main.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 
 import '../widget/button_to_home.dart';
 import '../widget/navegation_button.dart';
@@ -21,12 +19,13 @@ class OnboardingPage extends StatefulWidget {
 class _OnboardingPageState extends State<OnboardingPage> {
   int currentPage = 0;
 
+  // ignore: prefer_final_fields
   PageController _pageController = PageController(initialPage: 0);
 
   AnimatedContainer dotIndicator(index) {
     return AnimatedContainer(
-      margin: EdgeInsets.only(right: 5),
-      duration: Duration(microseconds: 400),
+      margin: const EdgeInsets.only(right: 5),
+      duration: const Duration(microseconds: 400),
       height: 12,
       width: 10,
       decoration: BoxDecoration(
@@ -36,13 +35,13 @@ class _OnboardingPageState extends State<OnboardingPage> {
     );
   }
 
-  Future setSeenOnboard()async {
+  Future setSeenOnboard() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     seenOnboard = await prefs.setBool('seenOnboard', true);
   }
+
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     setSeenOnboard();
   }
@@ -50,7 +49,6 @@ class _OnboardingPageState extends State<OnboardingPage> {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-    double sizeH = SizeConfig.blockSizeH!;
     double sizeV = SizeConfig.blockSizeV!;
     return Scaffold(
       backgroundColor: Colors.white,
@@ -83,7 +81,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                   SizedBox(
                     height: sizeV * 3,
                   ),
-                  Container(
+                  SizedBox(
                     height: sizeV * 45,
                     child: Image.asset(
                       onboardingConteudos[index].image,
@@ -113,39 +111,44 @@ class _OnboardingPageState extends State<OnboardingPage> {
               child: Column(
                 children: [
                   currentPage == onboardingConteudos.length - 1
-                  ? MyTextButton(
-                    buttoName: 'Ir ao Login',
-                    onPressed: (){
-                      Navigator.push(
-                        context, 
-                        MaterialPageRoute(
-                          builder: (context)=>
-                          LoginPage()));
-                    },
-                    bgColor: kPrimaryColor,
-                    )
-                  : Row (
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      OnBoardNavBtn(
-                        name: 'Pular',
-                        onPressed: () {
-                          Navigator.push(context,
-                          MaterialPageRoute(builder: (context) =>
-                          LoginPage()));
-                        },
-                      ),
-                      Row(
-                        children: List.generate(onboardingConteudos.length,
-                            (index) => dotIndicator(index)),
-                      ),
-                      OnBoardNavBtn(
-                        name: 'Continuar', 
-                        onPressed: () {
-                          _pageController.nextPage(duration: Duration(milliseconds: 400), curve: Curves.easeInOut);
-                        }),
-                    ],
-                  ),
+                      ? MyTextButton(
+                          buttoName: 'Ir ao Login',
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const LoginPage()));
+                          },
+                          bgColor: kPrimaryColor,
+                        )
+                      : Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            OnBoardNavBtn(
+                              name: 'Pular',
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const LoginPage()));
+                              },
+                            ),
+                            Row(
+                              children: List.generate(
+                                  onboardingConteudos.length,
+                                  (index) => dotIndicator(index)),
+                            ),
+                            OnBoardNavBtn(
+                                name: 'Continuar',
+                                onPressed: () {
+                                  _pageController.nextPage(
+                                      duration:
+                                          const Duration(milliseconds: 400),
+                                      curve: Curves.easeInOut);
+                                }),
+                          ],
+                        ),
                 ],
               ))
         ],
@@ -153,6 +156,3 @@ class _OnboardingPageState extends State<OnboardingPage> {
     );
   }
 }
-
-
-

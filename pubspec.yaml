@@ -1,5 +1,5 @@
-name: appComida
-description: appComida Flutter Clone.
+name: app_comida
+description: app_comida Flutter Clone.
 publish_to: 'none'
 version: 1.0.0+1
 
@@ -27,16 +27,12 @@ dependencies:
   google_fonts: ^4.0.4
   dart_jsonwebtoken: ^2.7.1
   jwt_decoder:
+  counter_button: ^1.0.1
+  firebase_core: ^2.14.0
+  cloud_firestore: ^4.8.1
+  firebase_auth: ^4.6.3
+  intl: ^0.18.0
 
-
-flutter_native_splash:
-  color: "#FFFFFF"
-  background_image: "lib/assets/images/tela_inicial.png"
-  android: true
-  ios: true
-  android_gravity: center
-  ios_content_mode: center
-  fullscreen: true
 
 dev_dependencies:
   flutter_test:

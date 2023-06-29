@@ -1,8 +1,6 @@
-import 'dart:convert';
-import 'package:appComida/src/feature/login/view/page/login.dart';
+import 'package:app_comida/src/feature/login/view/page/login.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'package:appComida/src/feature/login/config_url.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({super.key});
@@ -16,34 +14,41 @@ class _SignupPageState extends State<SignupPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   bool _isNotValidate = false;
+/*
+  AuthService authService = AuthService();
 
   void registerUser() async {
     if (nomeController.text.isNotEmpty &&
         emailController.text.isNotEmpty &&
         passwordController.text.isNotEmpty) {
-      var regBody = {
+      authService.cadastraUsuario(
+          nome: nomeController.text,
+          email: emailController.text,
+          senha: passwordController.text);
+    } else {
+      setState(() {
+        _isNotValidate = true;
+      });
+    }
+  }*/
+  Future registerUser() async {
+    if (nomeController.text.isNotEmpty &&
+        emailController.text.isNotEmpty &&
+        passwordController.text.isNotEmpty) {
+      final docCliente = FirebaseFirestore.instance
+          .collection('cliente')
+          .doc(emailController.text);
+      var json = {
         "nome": nomeController.text,
         "email": emailController.text,
         "password": passwordController.text
       };
 
-      var response = await http.post(Uri.parse(registration),
-          headers: {"Content-Type": "application/json"},
-          body: json.encode(regBody),
-          
-          );
+      await docCliente.set(json);
 
-      var jsonResponse = jsonDecode(response.body);
-      
-
-      if(jsonResponse['status'])
-      {
-        Navigator.push(context,MaterialPageRoute(builder: (context)=>LoginPage()));
-
-      }else{
-        print("Algo esta errado");
-      }
-
+      // ignore: use_build_context_synchronously
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => const LoginPage()));
     } else {
       setState(() {
         _isNotValidate = true;
@@ -114,7 +119,7 @@ class _SignupPageState extends State<SignupPage> {
                 filled: true,
                 errorText: _isNotValidate ? "Insira nome novamente" : null,
                 labelText: "Nome",
-                labelStyle: TextStyle(
+                labelStyle: const TextStyle(
                   color: Colors.black38,
                   fontWeight: FontWeight.w400,
                   fontSize: 20,
@@ -131,16 +136,28 @@ class _SignupPageState extends State<SignupPage> {
               // autofocus: true,
               controller: emailController,
               keyboardType: TextInputType.emailAddress,
+
               decoration: InputDecoration(
                 filled: true,
                 errorText: _isNotValidate ? "Insira nome novamente" : null,
                 labelText: "E-mail",
-                labelStyle: TextStyle(
+                labelStyle: const TextStyle(
                   color: Colors.black38,
                   fontWeight: FontWeight.w400,
                   fontSize: 20,
                 ),
               ),
+              validator: (value) {
+                if (value == null || value == "") {
+                  return "O valor de e-mail deve ser preenchido";
+                }
+                if (!value.contains("@") ||
+                    !value.contains(".") ||
+                    value.length < 4) {
+                  return "O valor do e-mail deve ser válido";
+                }
+                return null;
+              },
               style: const TextStyle(
                 fontSize: 20,
               ),
@@ -153,17 +170,23 @@ class _SignupPageState extends State<SignupPage> {
               controller: passwordController,
               keyboardType: TextInputType.text,
               obscureText: true,
+              validator: (value) {
+                if (value == null || value.length < 6) {
+                  return "Insira uma senha válida.";
+                }
+                return null;
+              },
               decoration: InputDecoration(
                 filled: true,
                 errorText: _isNotValidate ? "Insira nome novamente" : null,
                 labelText: "Senha",
-                labelStyle: TextStyle(
+                labelStyle: const TextStyle(
                   color: Colors.black38,
                   fontWeight: FontWeight.w400,
                   fontSize: 20,
                 ),
               ),
-              style: TextStyle(fontSize: 20),
+              style: const TextStyle(fontSize: 20),
             ),
             const SizedBox(
               height: 10,
@@ -208,7 +231,7 @@ class _SignupPageState extends State<SignupPage> {
             Container(
               height: 40,
               alignment: Alignment.center,
-              child: button_signup_leave(),
+              child: const button_signup_leave(),
             ),
           ],
         ),
@@ -217,6 +240,7 @@ class _SignupPageState extends State<SignupPage> {
   }
 }
 
+// ignore: camel_case_types
 class button_signup_leave extends StatelessWidget {
   const button_signup_leave({
     super.key,
@@ -225,7 +249,7 @@ class button_signup_leave extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      child: Text(
+      child: const Text(
         "Cancelar",
         textAlign: TextAlign.center,
       ),
