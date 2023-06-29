@@ -12,6 +12,8 @@ Primeiramente é necessário fazer algumas instalações para o funcionamento do
 
 3- Clone o repositório na máquina;
 
+Obs: Foi enviado para os emails (kenniston.bonfim@iesb.br e kenniston@gmail.com) a permissão para o acesso do banco no Firebase, por favor não esquecer de aceitar.
+
 4- Abra o reporsitório do projeto no VsCode e faça login no Firebase com sua Conta do Google executando o comando "firebase login" no terminal, em seguida execute o comando "dart pub global activate flutterfire_cli";
 
 5- Adicione nas varáveis de ambiente o seguinte caminho C:\Users\"seu usuario"\AppData\Local\Pub\Cache\bin para conseguir executar o comando flutterfire;
